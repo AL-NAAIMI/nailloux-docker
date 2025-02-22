@@ -1,0 +1,40 @@
+{
+    "Image Format": "MPO",
+    "Image Size": [
+        6000,
+        4000
+    ],
+    "Image Mode": "RGB",
+    "EXIF Data": {
+        "GPSInfo": 40144,
+        "PrintImageMatching": "PrintIM\u00000300\u0000\u0000\u0003\u0000\u0002\u0000\u0001\u0000\u0000\u0000\u0003\u0000\"\u0000\u0000\u0000\u0001\u0001\u0000\u0000\u0000\u0000\ufffd\u0017\u0000\u0000\u0010'\u0000\u0000\u0005\b\u0000\u0000\u0010'\u0000\u0000\ufffd\u0005\u0000\u0000\u0010'\u0000\u0000'\f\u0000\u0000\u0010'\u0000\u0000q\u0018\u0000\u0000\u0010'\u0000\u0000x\u0002\u0000\u0000\u0010'\u0000\u0000\ufffd\u0000\u0000\u0000\u0010'\u0000\u0000a\u0002\u0000\u0000\u0010'\u0000\u0000\u0016\u001d\u0000\u0000\u0010'\u0000\u0000",
+        "ResolutionUnit": 2,
+        "ExifOffset": 500,
+        "ImageDescription": "                               ",
+        "Make": "SONY",
+        "Model": "SLT-A77V",
+        "Software": "SLT-A77V v1.06",
+        "Orientation": 1,
+        "DateTime": "2023:09:30 20:31:48",
+        "YCbCrCoefficients": [
+            "0.299",
+            "0.587",
+            "0.114"
+        ],
+        "YCbCrPositioning": 2,
+        "XResolution": "350.0",
+        "YResolution": "350.0",
+        "WhitePoint": [
+            "0.313",
+            "0.329"
+        ],
+        "PrimaryChromaticities": [
+            "0.64",
+            "0.33",
+            "0.21",
+            "0.71",
+            "0.15",
+            "0.06"
+        ]
+    }
+}
