@@ -1,0 +1,163 @@
+/* ============================
+   Modern Popup Modal
+============================ */
+
+/* Style de la fenêtre modale */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1050;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.75); /* Ombre sombre plus marquée */
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    margin-top: 90px;
+}
+
+/* Contenu du popup */
+.modal-content {
+    background: linear-gradient(135deg, #ffffff, #f3f3f3);
+    width: 70%;
+    max-width: 900px; /* Largeur plus grande */
+    padding: 25px;
+    border: none;
+    border-radius: 20px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+    animation: modalFadeIn 0.5s ease-out;
+    transform: scale(1.05);
+}
+
+/* Animation d'ouverture */
+@keyframes modalFadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Empêcher le défilement de l'arrière-plan */
+body.modal-open {
+    overflow: hidden;
+}
+
+/* Image dans la modale */
+.modal-content img {
+    width: 100%;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    object-fit: cover;
+}
+
+/* Formulaire */
+.modal-content form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Groupe de formulaire */
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.form-group label {
+    font-weight: bold;
+    font-size: 18px;
+    color: #333;
+}
+
+.form-group input,
+.form-group textarea {
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 16px;
+    width: 100%;
+    transition: border-color 0.3s;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+/* Boutons */
+button.post-btn, .upload-btn, .cancel-btn {
+    padding: 12px 20px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.3s;
+}
+
+button.post-btn {
+    background-color: #007bff;
+    color: white;
+    margin-left: 5px;
+}
+
+button.post-btn:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(0, 123, 255, 0.5);
+}
+
+.upload-btn {
+    background-color: #28a745;
+    color: white;
+}
+
+.upload-btn:hover {
+    background-color: #218838;
+    transform: scale(1.05);
+}
+
+.cancel-btn {
+    background-color: #dc3545;
+    color: white;
+}
+
+.cancel-btn:hover {
+    background-color: #c82333;
+    transform: scale(1.05);
+}
+
+/* Bouton de fermeture */
+.close-btn {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    font-size: 32px;
+    font-weight: bold;
+    color: #333;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.close-btn:hover {
+    color: #000;
+}
+
+#selectedImage {
+    width: 500px;        /* Largeur fixe de l'image */
+    height: 300px;       /* Hauteur fixe de l'image */
+    object-fit: contain; /* L'image s'ajuste sans déformation */
+    display: block;      /* Rend l'image un élément de bloc */
+    margin: auto;        /* Centre l'image horizontalement */
+}
+
+.comment-count-zero {
+    margin-left: 5px;
+}

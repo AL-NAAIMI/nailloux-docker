@@ -1,0 +1,111 @@
+:root {
+    --lien-onglet: #555;
+    --onglet-hover: #ff6600;
+    --gris-fonce: #A89092;
+    --gris-pale: #5a4e50;
+    --gris-fonce-transparent: rgba(168, 144, 146, 0.2);
+    --background-color: #121212;
+    --light-background: #1e1e1e;
+    --accent-color: #ff6600;
+    --text-color: #ffffff;
+    --hover-shadow: 0 8px 15px rgba(0, 0, 0, 0.5);
+    --font-family: 'Arial', sans-serif;
+}
+
+body {
+    font-family: var(--font-family);
+    background-color: var(--background-color);
+    color: var(--text-color);
+    margin: 0;
+    padding: 0;
+}
+
+.edit-event-form {
+    box-shadow: var(--hover-shadow);
+    border-radius: 15px;
+    background-color: var(--light-background);
+    display: flex;
+    flex-direction: column;
+    padding: 25px;
+    width: 60%;
+    margin: 50px auto;
+    color: var(--text-color);
+}
+
+.edit-event-form h1 {
+    font-size: 24px;
+    text-align: center;
+    color: var(--accent-color);
+    margin-bottom: 20px;
+}
+
+.edit-event-form label {
+    font-size: 16px;
+    color: var(--gris-fonce);
+    margin-bottom: 8px;
+    margin-top: 15px;
+    display: block;
+}
+
+.edit-event-form input[type="text"],
+.edit-event-form input[type="datetime-local"],
+.edit-event-form textarea,
+.edit-event-form select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    background-color: var(--gris-fonce-transparent);
+    border: 1px solid var(--gris-pale);
+    border-radius: 5px;
+    color: var(--text-color);
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+.edit-event-form input[type="text"]:focus,
+.edit-event-form input[type="datetime-local"]:focus,
+.edit-event-form textarea:focus,
+.edit-event-form select:focus {
+    border-color: var(--accent-color);
+}
+
+.edit-event-form textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+.edit-event-form button {
+    padding: 10px 20px;
+    background-color: var(--onglet-hover);
+    color: var(--text-color);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.edit-event-form button:hover {
+    transform: scale(1.05);
+    box-shadow: var(--hover-shadow);
+}
+
+.edit-event-form .back-button {
+    background-color: rgb(212, 52, 41);
+    color: white;
+    text-align: center;
+    padding: 10px 20px;
+    border-radius: 5px;
+    display: inline-block;
+    text-decoration: none;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    margin-top: 20px;
+}
+
+.edit-event-form .back-button:hover {
+    transform: scale(1.05);
+    box-shadow: var(--hover-shadow);
+}

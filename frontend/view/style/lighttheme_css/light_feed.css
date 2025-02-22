@@ -1,0 +1,446 @@
+:root {
+  --orange: #f08307;
+  --orange-fonce: #af6005;
+  --gris-pale: #373737;
+  --gris-fonce: #2a2a2a;
+  --ombre: rgba(0, 0, 0, 0.3);
+  background-color: #1a1818;
+}
+
+
+.feed-page-body {
+    margin-left: 5%;
+    margin-right: 5%;
+    color: rgb(0, 0, 0);
+
+}
+
+.feed-page-head {
+  display: flex;
+  color : white
+  
+
+}
+
+.feeds {
+    color: white;
+}
+
+.feed-container {
+  margin-top: 40px;
+  margin-left: 250px;
+  margin-right: 250px;
+  margin-bottom: 40px; /* Espace en bas entre le conteneur et l'élément suivant */
+  grid-column-gap: 20px;
+  padding: 10px; /* Espace intérieur */
+}
+
+
+
+.feed-post {
+  background-color: var(--gris-fonce);
+  min-width: 50%;
+  max-height: fit-content;
+  border-radius: 5px;
+  margin-left: 2px;
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.5);
+  margin-bottom: 60px;
+  padding-bottom: 60px; /* Espace interne ajouté */
+  border-radius: 30px;
+}
+
+/* Texte des publications en blanc */
+.feed-post-display-box-message {
+  color: white;
+}
+
+/* Texte des commentaires en blanc */
+.comment {
+  color: white;
+}
+
+.comments-section {
+  overflow-y: auto;
+  background-color: var(--gris-fonce);
+  border-radius: 5px;
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.5);
+  margin-top: 20px;
+  border-radius: 15px;
+}
+
+.feed-post-display-box-head li{
+  color: white;
+  display: inline-block;
+  vertical-align: middle;
+  margin-bottom: 20px;
+  margin-top: 10px;
+
+}
+
+.feed-post-display-box-message {
+  color: white;
+  padding-left: 5px;
+  max-height: 300px;
+  overflow-y: auto;
+  margin-bottom: 40px;
+}
+
+.feed-post-display-box-image {
+  color: white;
+  display: flex;
+  justify-content: center;
+  margin: 2px;
+  margin-bottom: 20px; /* Espace supplémentaire sous l'image */
+}
+a.feed-post-display-pseudo:visited{
+  color: white;
+}
+.feed-post-display-box-head a {  /* selectionne la ligne entière */
+  color: white;
+  text-decoration: none;
+  font-weight: bolder;
+  margin-left: 40px;
+}
+.comment-form {
+  display: flex; /* Utilisation de flexbox pour aligner les éléments sur une même ligne */
+  justify-content: flex-start; /* Aligne les éléments sur la gauche sans espace entre eux */
+  gap: 20px; /* Ajoute un espace uniforme de 20px entre la zone de texte et le bouton */
+  padding: 20px; /* Ajoute un espace interne pour plus de confort */
+  margin: 30px; /* Espace externe pour séparer de l'extérieur */
+  background-color: #2b2b2b; /* Fond légèrement plus sombre pour démarquer */
+  border-radius: 10px; /* Coins arrondis */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Ombre pour un effet de relief */
+  
+}
+
+.comment-form-zone {
+
+  flex-grow: 1; /* Permet au champ de saisie de prendre l'espace restant */
+  resize: none; /* Garde la taille de la zone fixe */
+  min-height: 40px; /* Hauteur minimale ajustée */
+  margin-right: 5px; /* Ajoute de l'espace entre la zone de texte et le bouton */
+  padding: 10px; /* Espace intérieur pour plus de confort lors de la saisie */
+  border: solid 2px var(--gris-fonce);
+  border-radius: 8px; /* Coins arrondis pour un look moderne */
+  box-shadow: inset 2px 3px 10px rgba(0, 0, 0, 0.4); /* Ombre interne */
+  background-color: #f4f0f0; /* Fond légèrement plus clair */
+  color: rgb(2, 2, 2); /* Texte en couleur foncée pour la lisibilité */
+  font-size: 14px; /* Taille de texte confortable */
+  width: 80%;
+}
+
+
+/* Style pour la section feed-post-display-box-head */
+.feed-post-display-box-head {
+  position: relative; /* Nécessaire pour la gestion du pseudo-élément */
+}
+
+/* Ligne blanche avec ombre sous .feed-post-display-box-head */
+.feed-post-display-box-head::after {
+  content: ""; /* Nécessaire pour créer un pseudo-élément */
+  position: absolute;
+  bottom: 0; /* Positionner la ligne au bas de l'élément */
+  left: 0;
+  width: 100%; /* Largeur de la ligne sur toute la section */
+  height: 2px; /* Épaisseur de la ligne */
+  background-color: white; /* Couleur de la ligne */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Ombre légère sous la ligne */
+}
+
+.feed-post-display-box-message {
+  justify-content: center; /* Centre horizontalement */
+  text-align: center; /* Centre le texte à l'intérieur */
+  margin-top: 40px;
+  margin-bottom: 40px;
+}
+
+/* Style du titre */
+.feed-post-title {
+  font-size: 1.8em;
+  font-weight: bold;
+  color: #f7f3f3;
+  margin-bottom: 10px;
+}
+
+
+.post-btn {
+  width: auto;
+  padding: 10px;
+  border-radius: 7px;
+  border: solid var(--orange-fonce) 1px;
+  background: var(--orange);
+  color: #fff !important;
+  vertical-align: top;
+  cursor:pointer;
+}
+.post-comment-btn {
+  margin-left: auto; /* Modifié pour déplacer à droite */
+  width: auto;
+  padding: 10px;
+  border-radius: 7px;
+  border: solid var(--orange-fonce) 1px;
+  background: var(--orange);
+  color: #fff !important;
+  vertical-align: top;
+  margin-top: 20px;
+  cursor: pointer;
+}
+
+.comment-box {
+  background-color: #2b2b2b; /* Fond sombre pour s'harmoniser avec la section */
+  margin: 20px 0; /* Espace plus large au-dessus et en dessous */
+  border-radius: 10px; /* Coins arrondis pour un aspect moderne */
+  padding: 15px; /* Espace intérieur pour éviter que le texte soit trop serré */
+  color: white; /* Texte blanc pour un bon contraste */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Ombre douce pour un effet de relief */
+  font-size: 14px; /* Taille de police agréable à lire */
+  line-height: 1.6; /* Meilleure lisibilité pour le texte */
+}
+
+
+
+
+.account-profpic {
+  border-radius: 50%;
+    border: solid rgb(255, 255, 255);
+  width: 5em;
+}
+
+
+.account-profpic-comment {
+  border-radius: 50%; 
+  height: 50px; 
+  width: 50px; 
+  object-fit: cover;
+  border: 2px solid #f5f5f5; 
+  margin-right: 15px; 
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.comment-content {
+  display: flex;
+  flex-direction: column; /* Organise les textes verticalement */
+  flex: 1; /* Permet au contenu de s'adapter à l'espace disponible */
+}
+
+.comment-header {
+  display: flex; /* Aligne le prénom et la date sur une seule ligne */
+  justify-content: space-between; /* Sépare le prénom et la date */
+  align-items: center; /* Aligne verticalement */
+  margin-bottom: 5px; /* Espace avec le commentaire */
+}
+
+.comment-prenom {
+  font-size: 16px;
+  font-weight: bold;
+  color: #ffffff;
+}
+
+.comment-date {
+  font-size: 12px;
+  color: #a0a0a0;
+}
+
+.comment {
+  font-size: 14px; 
+  color: #eaeaea; 
+  margin-top: 5px; /* Espace entre le commentaire et l'entête */
+  line-height: 1.5; /* Meilleure lisibilité */
+}
+
+
+#postForm {
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-template-rows: auto auto auto;
+  grid-template-areas:
+    "textarea file"
+    "submit submit"
+    ". public-toggle";
+}
+
+.public-checkbox {
+  align-content: center;
+}
+
+
+.public-toggle {
+  grid-area: public-toggle;
+  align-self: center;
+  justify-self: end;
+  margin-top: auto;
+  min-width: 12em;
+  display: flex;
+  justify-content: space-between;
+  color: white
+}
+
+#post.feed-post-box-textarea {
+  min-width: 500px;
+  min-height: 100px;
+  margin-left: 1em;
+  resize: none;
+  border: solid 2px var(--gris-fonce);
+  border-radius: 5px;
+  box-shadow: inset 2px 3px 10px var(--ombre)
+}
+
+input#postimage {
+  display: none;
+}
+
+.postimage-custom {
+  margin-left: 1em;
+  align-self: center;
+  text-align: center;
+  padding:10px 20px;
+  border-radius: 7px;
+  border: solid var(--orange-fonce) 1px;
+  background: var(--orange);
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+  max-width: 150px;
+}
+
+.feed-post-display-box-message::-webkit-scrollbar,
+.comments-section::-webkit-scrollbar {
+  width: 5px;
+  height: auto;
+}
+
+.feed-post-display-box-message::-webkit-scrollbar-track,
+.comments-section::-webkit-scrollbar-track {
+  background: #d8c4b3;
+  border-radius: 10px;
+}
+
+.feed-post-display-box-message::-webkit-scrollbar-thumb,
+.comments-section::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background: #9e7f62;
+}
+
+.feed-post-display-box-message::-webkit-scrollbar:hover,
+.comments-section::-webkit-scrollbar:hover {
+  width: 8px;
+}
+
+.feed-post-display-box-message::-webkit-scrollbar-thumb:hover,
+.comments-section::-webkit-scrollbar-thumb:hover {
+  background: #6e4f39;
+  
+}
+
+textarea {
+  color: black;
+}
+
+
+.feed-posting-box {
+  display: flex;
+  justify-content: center; /* Centre horizontalement */
+  align-items: center; /* Centre verticalement */
+  height: 20vh; /* Utilise toute la hauteur de la page */
+  width: 100%; /* Prend toute la largeur disponible */
+  flex-direction: column; /* Organise les éléments en colonne */
+  border-radius: 10px;
+  padding: 20px;
+  margin-left: -500px;
+  box-sizing: border-box;
+}
+
+#postForm {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto auto auto;
+  grid-template-areas:
+    "textarea"
+    "file"
+    "submit";
+  width: 15%;
+  max-width: 600px; /* Limite la largeur du formulaire */
+  padding: 20px;
+  border-radius: 10px;
+}
+
+
+.public-toggle {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.postimage-custom {
+  align-self: center;
+  padding: 10px 20px;
+  border-radius: 7px;
+  border: solid var(--orange-fonce) 1px;
+  background: var(--orange);
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+button.post-btn {
+  padding: 10px 20px;
+  background-color: var(--orange);
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+button.post-btn:hover {
+  background-color: var(--orange-fonce);
+}
+
+/* bouton commentaire affichage */
+
+.hidden {
+  display: none;
+}
+
+/* Style général du bouton */
+.toggle-comments-btn {
+  background-color: transparent; /* Pas de fond visible */
+  border: none; /* Pas de bordure */
+  padding: 5px; /* Espacement autour de l'image */
+  cursor: pointer; /* Pointeur de souris pour indiquer que c'est cliquable */
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Effet de transition */
+  outline: none; /* Retirer le contour de focus par défaut */
+  margin-left: 60px;
+}
+
+/* Effet de survol */
+.toggle-comments-btn:hover {
+  transform: scale(1.1); /* Agrandir légèrement l'image */
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2); /* Ombre portée pour l'effet 3D */
+}
+
+/* Effet au clic */
+.toggle-comments-btn:active {
+  transform: scale(1); /* Réduire légèrement après le clic */
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3); /* Ombre plus discrète */
+}
+
+/* Style de l'image */
+.toggle-comments-btn img {
+  width: 100px; /* Taille de l'image (plus grand pour plus de visibilité) */
+  height: 24px; /* Assurer que l'image soit carrée */
+  transition: transform 0.3s ease; /* Effet de transition pour l'agrandissement */
+}
+
+/* Ajouter un effet de transition à l'image lors du survol */
+.toggle-comments-btn:hover img {
+  transform: scale(1.1); /* Légèrement agrandir l'image au survol */
+}
+
+.comment-count {
+  font-size: 14px;
+  color: #cdcccc;
+  margin-left: 10px;
+}

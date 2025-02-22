@@ -1,0 +1,158 @@
+:root {
+    --orange: #f08307;
+    --orange-fonce: #af6005;
+    --gris-pale: #373737;
+    --gris-fonce: #2a2a2a;
+    --ombre: rgba(0, 0, 0, 0.3);
+    background-color: #1a1818;
+}
+
+/* ============================
+                 Formulaire de Recherche
+                 ============================ */
+
+.search-form-box {
+    display: flex;
+    justify-content: center; /* Centrer horizontalement */
+    align-items: center; /* Centrer verticalement */
+    height: 60vh; /* Ajuster la hauteur */
+    margin-bottom: -120px; /* Réduire l'espace entre le formulaire et les photos */
+}
+
+.search-input {
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    padding: 10px;
+    font-size: 16px;
+    outline: none;
+}
+
+.search-btn img {
+    width: 20px;
+    height: 20px;
+}
+
+/* ============================
+                 Section Galerie Photos
+                 ============================ */
+
+.search-results {
+    margin-top: 20px; /* Réduire l'espace entre le formulaire et la galerie */
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Grille flexible */
+    gap: 15px;
+    padding: 10px;
+}
+
+.publication {
+    position: relative;
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.publication:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.feed-post-display-box-image {
+    width: 100%;
+    height: 200px; /* Taille de l'image */
+    overflow: hidden;
+    border-radius: 10px;
+}
+
+.feed-post-display-box-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.feed-post-display-box-image a {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.feed-post-display-box-image img:hover {
+    transform: scale(1.1); /* Agrandissement de l'image au survol */
+}
+
+.publication p {
+    padding: 10px;
+    font-size: 14px;
+    color: #333;
+    font-weight: bold;
+}
+
+/* Styles pour les résultats de recherche sans image */
+.search-results p {
+    color: #888;
+    text-align: center;
+    font-size: 18px;
+}
+
+/* ============================
+                   Responsive Design
+                   ============================ */
+
+/* Sur les petits écrans, ajuster la disposition de la galerie */
+@media (max-width: 768px) {
+    .search-form input {
+        width: 90%;
+    }
+
+    .search-form button {
+        width: 100%;
+    }
+
+    .search-results {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); /* Plus compact sur mobile */
+    }
+}
+
+@media (max-width: 480px) {
+    .search-form input {
+        font-size: 14px;
+    }
+
+    .feed-post-display-box-image {
+        height: 150px; /* Ajuster la hauteur sur les petits écrans */
+    }
+
+    .publication p {
+        font-size: 12px; /* Texte plus petit sur mobile */
+    }
+}
+/* Lightbox styling */
+.lightbox {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.lightbox-img {
+    max-width: 90%;
+    max-height: 90%;
+    border-radius: 10px;
+}
+
+.close-btn {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    font-size: 40px;
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+}

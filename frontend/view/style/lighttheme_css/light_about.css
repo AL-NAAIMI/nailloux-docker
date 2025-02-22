@@ -1,0 +1,895 @@
+:root {
+  --orange: #f08307;
+  --black: #000000;
+  --orangefoncé : #ff8800;
+  --font-family: 'Arial', sans-serif; /* Police par défaut */
+}
+
+/* ============================
+         Global Styles
+         ============================ */
+body {
+  font-family: var(--font-family);
+  background-color: #1a1818;
+  color: black; /* Texte en noir */
+}
+
+h2 {
+  font-size: 2rem;
+  color: black; /* Titre en noir */
+  margin-bottom: 20px;
+}
+
+p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: black; /* Texte en noir */
+}
+
+/* ============================
+         About Us Section Styles
+         ============================ */
+.about-us {
+  padding: 40px 20px;
+  background-color: rgb(41, 38, 38);
+  text-align: center;
+}
+
+/* ============================
+         Navigation des Onglets
+         ============================ */
+.account-tabs {
+  margin: 28px 0;
+  padding: 0;
+  text-align: center;
+}
+
+.account-tabs ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex; /* Disposition horizontale */
+  justify-content: space-evenly; /* Répartition égale des éléments */
+  background-color: #fff;
+  border-radius: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+.acc-tabs-item {
+  margin: 0;
+}
+
+.acc-tabs-link {
+  display: block;
+  padding: 10px 30px; /* Moins d'espace vertical, plus horizontal */
+  text-decoration: none;
+  font-size: 1rem;
+  color: var(--black); /* Couleur du texte en noir */
+  transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+  border-radius: 15px;
+  text-align: center;
+}
+
+/* Effet de survol - zoom léger et ombre */
+.acc-tabs-link:hover {
+  background-color: #f0f0f0;
+  color: var(--orange);
+  transform: scale(1.05); /* Zoom léger */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Ombre accentuée */
+}
+
+/* Effet de survol sur l'élément actif */
+.acc-tabs-link.active {
+  background-color: var(--orange);
+  color: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Ombre subtile sur l'élément actif */
+}
+
+/* ============================
+         Animation du Soulignement
+         ============================ */
+.acc-tabs-link::after {
+  content: '';
+  display: block;
+  height: 3px;
+  width: 0;
+  background-color: var(--orange);
+  transition: width 0.3s ease; /* Animation de la largeur */
+}
+
+.acc-tabs-link:hover::after {
+  width: 100%; /* Le soulignement se développe sur toute la largeur */
+}
+
+/* ============================
+         Responsive Design
+         ============================ */
+@media screen and (max-width: 768px) {
+  .account-tabs ul {
+    flex-direction: column; /* Empile les onglets verticalement sur petits écrans */
+  }
+
+  .acc-tabs-link {
+    font-size: 1rem;
+    padding: 12px 20px; /* Plus d'espace sur petits écrans */
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .about-us {
+    padding: 20px;
+  }
+
+  .photographe-text h2 {
+    font-size: 1.6rem;
+    color: black; /* Titre en noir sur petits écrans */
+  }
+
+  .photographe-text p {
+    font-size: 0.9rem;
+    color: black; /* Texte en noir sur petits écrans */
+  }
+
+  .photographe-img {
+    max-width: 100%;
+    margin-top: 20px;
+  }
+}
+
+/* ============================
+         Calendar Page Styles
+         ============================ */
+.calendar-page {
+  max-width: 1200px;
+  margin: 20px auto;
+  padding: 20px;
+  background: #2b2b2b;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+  text-align: center;
+  color: #f08307;
+}
+
+.btn {
+  display: block;
+  margin: 10px auto 20px;
+  padding: 10px 20px;
+  background-color: #f08307;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+  background-color: #b86506;
+  transform: scale(1.1);
+}
+
+/* ============================
+         Calendar Grid Styles
+         ============================ */
+.calendar {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 1px;
+  border: 1px solid black;
+  background-color: black;
+}
+
+.calendar-header {
+  font-weight: bold;
+  color: white;
+  background-color: #2b2b2b;
+  padding: 10px 0;
+  text-transform: uppercase;
+  font-size: 20px;
+  text-align: center;
+}
+
+.day {
+  position: relative;
+  background-color: rgb(151, 151, 151);
+  height: 120px;
+  border: 1px solid #8a8a8a;
+  overflow: hidden;
+  padding: 5px;
+  box-sizing: border-box;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  font-size: 16px;
+}
+
+.day:hover {
+  background-color:  rgb(252, 229, 206);
+}
+
+.day.disabled {
+  background-color:  rgb(56, 56, 56);
+  cursor: not-allowed;
+}
+
+.day-event {
+  font-weight: bold;
+}
+
+.event {
+  position: relative;
+  background-color: #28a745;
+  color: white;
+  padding: 5px;
+  margin-top: 5px;
+  border-radius: 3px;
+  font-size: 12px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ============================
+         Event details 
+         ============================ */
+
+/* Conteneur principal des détails de l'événement */
+.event-details {
+  width: 90%;
+  max-width: 800px;
+  margin: 50px auto;
+  background: rgba(0, 0, 0, 0.1); /* Fond noir transparent */
+  border-radius: 15px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(10px); /* Flou du fond pour effet moderne */
+}
+
+/* Titre de l'événement */
+.event-details h1 {
+  font-size: 2em;
+  color: #e1e7ed;
+  margin-bottom: 15px;
+}
+
+/* Détails de l'événement */
+.event-details p {
+  font-size: 1.1em;
+  margin-bottom: 10px;
+  color: #e1e7ed;
+}
+
+.event-details strong {
+  color: #e1e7ed;
+}
+
+/* Conteneur parent pour les boutons */
+.button-container {
+  display: flex;
+  justify-content: center;  /* Centrer horizontalement */
+  gap: 10px;  /* Espace entre les boutons */
+  margin-top: 20px;
+}
+
+/* Style des boutons déjà définis */
+.back-button {
+  display: inline-block;
+  background-color: #3498db;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.back-button:hover {
+  background-color: #2980b9;
+}
+
+.delete-button {
+  display: inline-block;
+  background-color: #e74c3c;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  font-size: 1em;
+  transition: background-color 0.3s ease;
+}
+
+.delete-button:hover {
+  background-color: #c0392b;
+}
+
+
+/* Effet de transition sur le formulaire */
+form {
+  margin-top: 20px;
+}
+
+form button {
+  transition: transform 0.3s ease;
+}
+
+form button:hover {
+  transform: scale(1.05); /* Légère augmentation de taille sur hover */
+}
+
+
+
+
+
+
+/* ============================
+         Modal Styles
+         ============================ */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 10;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding-top: 60px;
+  margin-top: 80px;
+}
+
+.modal-content {
+  background-color: white;
+  margin: auto;
+  padding: 20px;
+  border-radius: 5px;
+  width: 90%;
+  max-width: 500px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal-header h5 {
+  margin: 0;
+}
+
+.close {
+  font-size: 24px;
+  cursor: pointer;
+  color: #333;
+}
+
+/* ============================
+         Form Styles
+         ============================ */
+.form-control {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+.form-control:focus {
+  border-color: #f08307;
+  outline: none;
+}
+
+.btn-submit {
+  display: inline-block;
+  background-color: #28a745;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s;
+}
+
+.btn-submit:hover {
+  background-color: #218838;
+}
+
+/* ============================
+         Overlay Styles
+         ============================ */
+.overlay {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+
+/* ============================
+         Section de Dépôt de Document
+         ============================ */
+.upload-section {
+  text-align: center;
+  margin: 50px auto;
+}
+
+.upload-section .open-modal-btn {
+  background-color: var(--orange);
+  color: white;
+  padding: 15px 30px;
+  border: none;
+  border-radius: 10px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.upload-section .open-modal-btn:hover {
+  background-color: #e07d00;
+  transform:scale(1.1);
+}
+
+/* --- Modal de Dépôt de Document --- */
+#uploadModal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background-color: white;
+  padding: 30px;
+  border-radius: 10px;
+  width: 500px;
+  max-width: 90%;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.modal-content h2 {
+  text-align: center;
+  color: var(--orange);
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+}
+
+.modal-content .close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 1.5rem;
+  color: var(--orange);
+  cursor: pointer;
+}
+
+.modal-content form {
+  display: flex;
+  flex-direction: column;
+}
+
+.modal-content input[type="file"] {
+  margin-bottom: 20px;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  background-color: #f9f9f9;
+}
+
+.modal-content input[type="text"] {
+  padding: 10px;
+  margin-bottom: 20px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+}
+
+.modal-content .upload-btn {
+  background-color: var(--orange);
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 1.1rem;
+  transition: background-color 0.3s ease;
+}
+
+.modal-content .upload-btn:hover {
+  background-color: #e07d00;
+}
+
+/* --- Liste des Documents --- */
+.document-list-section {
+  margin: 50px auto;
+  max-width: 90%;
+  text-align: center;
+}
+
+.document-list-section h2 {
+  color: var(--orangefoncé); /*change le titre du depot doc */
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+.document-list-section table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  background-color: white; /* Fond du tableau en blanc */
+}
+
+.document-list-section table th,
+.document-list-section table td {
+  padding: 10px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+.document-list-section table th {
+  background-color: var(--orange);
+  color: white;
+}
+
+.document-list-section table td {
+  background-color: #f9f9f9;
+}
+
+.document-list-section table tr:hover {
+  background-color: #f1f1f1;
+}
+
+
+/* Modern CSS for Gallery */
+
+.acc-photo {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  background: #333;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.acc-photo h1 {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 2.5rem;
+  color: white;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+}
+
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  padding: 10px;
+}
+
+.gallery p {
+  color: white;
+}
+
+.gallery-item {
+  position: relative;
+  overflow: hidden;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.gallery-item:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.feed-post-display-box-image {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.feed-post-display-box-image img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 12px;
+  transition: transform 0.3s ease-in-out;
+}
+
+.feed-post-display-box-image:hover img {
+  transform: scale(1.1);
+}
+
+/* Lightbox Overlay */
+.lightbox {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.lightbox img {
+  max-width: 90%;
+  max-height: 90%;
+  border-radius: 8px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
+
+.lightbox.active {
+  display: flex;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .acc-photo h1 {
+      font-size: 1.8rem;
+  }
+
+  .gallery {
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  }
+}
+
+
+
+/* Section des profils */
+.profiles-section {
+  max-width: 1200px;
+  margin: 50px auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.profiles-section h1 {
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+  color: #2c3e50;
+}
+
+.profiles-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+.profile-card {
+  background: #fff;
+  border-radius: 15px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  max-width: 300px;
+  padding: 20px;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.profile-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+}
+
+.profile-img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 15px;
+  border: 3px solid #2c3e50;
+}
+
+.profile-card h2 {
+  font-size: 1.5rem;
+  color: #2c3e50;
+  margin-bottom: 10px;
+}
+
+.profile-card p {
+  font-size: 0.9rem;
+  color: #555;
+  margin-bottom: 20px;
+}
+
+.profile-card button {
+  background-color: #3498db;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+}
+
+.profile-card button:hover {
+  background-color: #2980b9;
+}
+
+/* Section for Accueil Photo (Galerie) */
+.acc-photo {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  background: #333;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  margin-top: 40px;
+}
+
+.acc-photo h1 {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 2.5rem;
+  color: white;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+}
+
+/* Gallery Grid */
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Responsive grid */
+  gap: 20px;
+  padding: 10px;
+}
+
+.gallery-item {
+  position: relative;
+  overflow: hidden;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.gallery-item:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.feed-post-display-box-image {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.feed-post-display-box-image img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 12px;
+  transition: transform 0.3s ease-in-out;
+}
+
+.feed-post-display-box-image:hover img {
+  transform: scale(1.1);
+}
+
+/* Section for Photographers */
+.photographers-section {
+  max-width: 1200px;
+  margin: 50px auto;
+  padding: 20px;
+  background-color: #333;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.photographers-section h1 {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 2.5rem;
+  color: white;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+}
+
+/* Photographer Cards Grid */
+.photographer-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Same grid as gallery */
+  gap: 20px;
+}
+
+.photographer-card {
+  background: #fff;
+  border-radius: 15px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  padding: 15px;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.photographer-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+}
+
+.photographer-card img {
+  width: 100px; /* Adjust the size of the image */
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 15px;
+}
+
+.photographer-card h2 {
+  font-size: 1.3rem;
+  color: #2c3e50;
+  margin-bottom: 10px;
+}
+
+.photographer-card p {
+  font-size: 0.9rem;
+  color: #555;
+  margin-bottom: 15px;
+}
+
+.photographer-card button {
+  background-color: #3498db;
+  color: #fff;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background-color 0.3s ease;
+}
+
+.photographer-card button:hover {
+  background-color: #2980b9;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .gallery,
+  .photographer-cards {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  }
+}
+
+/* Barre de navigation pour le calendrier */
+.nav-buttons {
+  display: flex;
+  align-items: center;
+}
+
+.nav-buttons button {
+  background-color: #1a1a1a;
+  /*Couleurdefondsombre*/color: white;
+  /*Texteenblancpourlecontraste*/border: none;
+  padding: 8px 15px;
+  margin: 0 5px;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.5s ease;
+}
+
+.nav-buttons button:hover {
+  transform: scale(1.1);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+}
+
+.month-year-display {
+  font-size: 18px;
+  font-weight: bold;
+  color: #ffa500; /* Orange foncé pour le texte */
+  text-align: center;
+  flex-grow: 1;
+}
+

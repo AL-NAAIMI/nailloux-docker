@@ -1,0 +1,9 @@
+-Bugs to fix :
+besoin de recharger la page du compte lorsqu'on supprime un post (rendre automatique le reload)
+arriver sur l'onglet photo quand on recherche un utilisateur plutôt que l'onglet feed
+
+
+
+
+-Not really recommended to do:
+autoriser les accents et apostrophe dans l'inscription????

@@ -1,0 +1,12 @@
+{
+    "solidity.telemetry": false,
+    "files.autoSave": "afterDelay",
+    "liveServer.settings.CustomBrowser": "firefox",
+    "explorer.confirmDelete": false,
+    "C_Cpp.default.compilerPath": "C:\\MinGW\\bin\\gcc.exe",
+    "code-runner.runInTerminal": true,
+    "php.validate.executablePath": "C:\\xampp\\php\\php.exe", 
+    "terminal.integrated.env.windows": {
+        "PATH": "C:\\xampp\\php\\;${env:PATH}"
+    }
+}

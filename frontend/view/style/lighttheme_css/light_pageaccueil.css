@@ -1,0 +1,269 @@
+/* ============================
+     Global Styles
+     ============================ */
+     body {
+        background-image: url('../../img/Montagne1.jpg');
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+        font-family: 'Arial', sans-serif;
+        margin: 0;
+        padding: 0;
+        color: white;
+    }
+    
+    /* ============================
+         Logo Nailloux
+         ============================ */
+    .about-us-logo {
+        margin-top: 100px;
+        max-width: 500px;
+        transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+    
+    .about-us-logo:hover {
+        transform: scale(1.1);
+        opacity: 0.9;
+    }
+    
+    /* ============================
+         Hero Section
+         ============================ */
+    .hero {
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        color: white;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .hero::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+    
+    .hero-content {
+        position: relative;
+        z-index: 1;
+    }
+    
+    .hero h1 {
+        font-size: 40px;
+        margin-bottom: 5px;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+        background: rgba(0, 0, 0, 0.4);
+    }
+    
+    .hero button {
+        padding: 10px 20px;
+        background-color: #ff5722;
+        border: none;
+        border-radius: 5px;
+        color: white;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+    
+    .hero button:hover {
+        background-color: #e64a19;
+        transform: scale(1.05);
+    }
+    
+    /* ============================
+         About Section
+         ============================ */
+    .about {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        padding: 50px;
+        background-color: #333;
+        gap: 30px;
+        position: relative;
+    }
+    
+    .about img {
+        max-width: 90%;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
+    
+    .about-content {
+        max-width: 600px;
+    }
+    
+    .about h2 {
+        font-size: 2rem;
+        margin-bottom: 20px;
+    }
+    
+    .about ul {
+        list-style-type: disc;
+        padding-left: 20px;
+    }
+    
+    .about ul li {
+        margin-bottom: 10px;
+        line-height: 1.6;
+    }
+    
+    /* Ligne blanche entre Gallery et About */
+    .about::after {
+        content: '';
+        display: block;
+        height: 1px;
+        background-color: white;
+        margin: 40px 0;
+    }
+    
+    /* ============================
+         Gallery Section
+         ============================ */
+    .acc-photo {
+        padding: 50px 10%;
+        background-color: #333;
+        text-align: center;
+    }
+    
+    .gallery {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr); /* 4 images par ligne sur grands écrans */
+        gap: 20px;
+        padding: 0;
+    }
+    
+    .gallery-item {
+        position: relative;
+        overflow: hidden;
+        border-radius: 15px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .gallery-item img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.3s ease, filter 0.3s ease;
+        border-radius: 15px;
+    }
+    
+    .gallery-item:hover {
+        transform: scale(1.05);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    }
+    
+    .gallery-item:hover img {
+        transform: scale(1.1);
+        filter: brightness(80%);
+    }
+    
+    .gallery-item a {
+        display: block;
+        width: 100%;
+        height: 100%;
+    }
+    
+    /* ============================
+         Lightbox Styles
+         ============================ */
+    .lightbox-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.8);
+        display: none;
+        justify-content: center;
+        align-items: center;
+        z-index: 10;
+    }
+    
+    .lightbox-img {
+        max-width: 80%;
+        max-height: 80%;
+        border-radius: 15px;
+    }
+
+   /* ============================
+     Ligne moderne entre Gallery et About
+     ============================ */
+.about::after {
+    content: '';
+    display: block;
+    height: 2px;
+    background: linear-gradient(to right, #ff5722, #e64a19, #ff5722); /* Dégradé de couleur */
+    margin: 40px 0;
+    width: 100%; /* Largeur de la ligne à 100% */
+    position: absolute; /* Position absolue par rapport à la section .about */
+    bottom: -20px; /* Place la ligne en bas de la section About */
+    left: 0; /* Positionne la ligne à l'extrémité gauche */
+    z-index: 1;
+    animation: slide 2s ease-in-out infinite;
+}
+
+/* Animation pour la ligne de séparation */
+@keyframes slide {
+    0% {
+        width: 70%;
+        left: 15%;
+    }
+    50% {
+        width: 80%;
+        left: 10%;
+    }
+    100% {
+        width: 70%;
+        left: 15%;
+    }
+}
+
+
+    
+    /* ============================
+         Responsive Design
+         ============================ */
+    @media (max-width: 1024px) {
+        .gallery {
+            grid-template-columns: repeat(2, 1fr); /* 2 images par ligne pour tablettes */
+        }
+    }
+    
+    @media (max-width: 768px) {
+        .about {
+            flex-direction: column;
+            text-align: center;
+        }
+    
+        .about img {
+            max-width: 100%;
+        }
+    
+        .gallery {
+            grid-template-columns: 1fr 1fr; /* 2 images par ligne pour petits écrans */
+        }
+    }
+    
+    @media (max-width: 480px) {
+        .gallery {
+            grid-template-columns: 1fr; /* 1 image par ligne pour mobile */
+        }
+    
+        .acc-photo {
+            padding: 30px 10%;
+        }
+    }
+    

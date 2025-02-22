@@ -1,0 +1,507 @@
+/* ============================
+   Variables de couleur
+   ============================ */
+   :root {
+    --orange: #f08307;
+    --orange-fonce: #af6005;
+    --marron: #7d3400;
+    --marron-fonce: #4f2109;
+    --beige-txt: #fff0c8;
+    --gris-liens: #120836;
+    --orange-pale: #e7a65b;
+    --orange-blanc: #977c5e;
+    --fond-page: #1e1e1e;
+    --fond-gris : #373737;
+    --fond-scroll: #A89092;
+    --clair : #df8e31;
+  
+    /* ============================
+       Dégradés
+       ============================ */
+    --degrade-beige-orange: linear-gradient(to right, var(--orange-blanc), var(--fond-gris));
+  }
+  
+  /* ============================
+     Contrôle tous les éléments
+     ============================ */
+  *{
+    font-family:Poppins;
+    animation-name: mainloader;
+    animation-duration: 0.5s;
+    animation-iteration-count: 1;
+  }
+  
+  ul {
+    padding-inline-start: 0;
+  }
+  
+  .logo {
+    height: 50px;
+    width: auto;
+    align-self: center;
+    margin-left: 5px;
+  }
+  
+  html, body {
+    overflow-x: hidden;
+  }
+  
+  body{
+    margin: 0;
+    padding: 0;
+    
+  }
+  
+  /* ============================
+     Barre de navigation
+     ============================ */
+     nav {
+      position: fixed; /* Fixe le header en haut de la page */
+      top: 0;
+      left: 0;
+      width: 100%; /* Assure que le header occupe toute la largeur */
+      height: 80px; /* Ajustez la hauteur si nécessaire */
+      background: var(--degrade-beige-orange); /* Fond avec dégradé */
+      border-bottom: 2px solid black; /* Bordure en bas pour contraste */
+      z-index: 9999; /* Place le header au-dessus de tout le reste */
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Optionnel : ombre pour un effet visuel */
+  }
+  .nav-btns {
+    display: flex;
+    margin-right: 1em;
+  }
+  
+  .menu-items {
+    align-self: center;
+  }
+  
+  nav ul li .navv-item{
+    color: var(--beige-txt);
+    font-size: 14px;
+    padding: 7px 13px;
+    margin: 5px;
+    border-radius: 3px;
+    text-transform: uppercase;
+    text-decoration: none;
+  }
+  
+  .navv-item.active{
+    color: var(--orange);
+    text-decoration: none;
+  }
+  
+  .navv-item.active,.navv-item:hover{
+    border: solid var(--beige-txt) 1px;
+    background: var(--orange-fonce);
+    transition: .5s;
+    color: #fff;
+  }
+  
+  .navv-item:hover {
+    text-decoration: underline;
+  }
+  
+  .menu-icon{
+    height: 15px;
+    width: 15px;
+    vertical-align: middle;
+    margin-right: 5px;
+    margin-left: 5px;
+  }
+  
+  nav ul li{
+    display: inline-block;
+  }
+  
+  .bar {
+    width: 30px;
+    height: 5px;
+    border-radius: 1px;
+    background-color: var(--beige-txt);
+    transition: all 0.5s;
+    display: none;
+  }
+  
+  /* ============================
+     Ecran moins lumineux lors de popups
+     ============================ */
+  .lightbox-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 9999;
+    text-align: center;
+  }
+  
+  /* ============================
+     Footer
+     ============================ */
+.footer {
+  display: flex;
+  background: #333; /* Couleur sombre pour le fond */
+  color: #fff; /* Texte clair pour un bon contraste */
+  height: auto; /* Hauteur automatique pour s'adapter au contenu */
+  width: 100%;
+  border-top: 3px solid #333; /* Bordure orange pour la séparation */
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px 0;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Ombre légère pour un effet 3D */
+  position: relative;
+  bottom: 0;
+  margin-top: 50px; /* Espacement entre le footer et le contenu au-dessus */
+}
+
+
+.footer p {
+  font-size: 1rem;
+  color: #bbb; /* Gris clair pour le texte */
+  text-align: center;
+  margin: 10px 0;
+  letter-spacing: 1px; /* Espacement des lettres pour un effet plus moderne */
+}
+
+.footer li {
+  display: inline-block;
+  margin: 5px 12px;
+}
+
+.footer-icons {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 15px;
+}
+
+.foot-link {
+  color: #bbb;
+  font-size: 1rem;
+  text-decoration: none;
+  padding: 5px 15px;
+  transition: all 0.3s ease;
+}
+
+.foot-link:visited {
+  color: #bbb;
+}
+
+.foot-link:hover {
+  color: #ff6f00; /* Couleur orange pour les liens au survol */
+  text-decoration: underline;
+  transform: scale(1.05); /* Effet d'agrandissement */
+}
+
+.footer-icons a {
+  color: #bbb;
+  font-size: 1.5rem;
+  margin: 0 18px;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.footer-icons a:hover {
+  color: #ff6f00; /* Changement de couleur sur hover */
+  transform: translateY(-5px); /* Effet de levée au survol */
+}
+
+.footer-icons a:active {
+  transform: translateY(2px); /* Effet de pression au clic */
+}
+
+/* ============================
+     Responsive design pour le footer
+     ============================ */
+@media screen and (max-width: 768px) {
+  .footer {
+    height: auto;
+    padding: 10px 0;
+  }
+
+  .footer p {
+    font-size: 0.9rem;
+  }
+
+  .footer-icons {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .footer-icons a {
+    margin: 8px 0;
+  }
+
+  .foot-link {
+    padding: 5px 12px;
+  }
+}
+
+  
+  
+  /* ============================
+     Recherche
+     ============================ */
+  .menu-items-li.search-item {
+    list-style-type: none;
+  }
+  
+  .search-bar {
+    resize: none;
+    border: solid 2px var(--orange-fonce);
+    border-radius: 5px;
+    box-shadow: inset 2px 3px 10px var(--ombre);
+    margin: 5px;
+  }
+  
+  .search-bar:focus-visible {
+    border: solid 2px var(--marron-fonce);
+    outline-color: white;
+    outline-offset: 3px;
+    outline-width: 2px;
+    outline-style: solid;
+  }
+  
+  .search-btn {
+    align-self: center;
+    padding: 5px 15px;
+    border-radius: 7px;
+    border: solid var(--orange-fonce) 1px;
+    background: var(--orange);
+    color: #fff;  
+    cursor: pointer;
+    font-size: 15px;
+  }
+  
+  .search-form {
+    margin: 0;
+  }
+  
+  /* ============================
+     Theme Button
+     ============================ */
+  .theme-button{
+    height: 25px;
+    width: auto;
+    border: dashed #ffffff3d 0.5px;
+    background-color: #104bca00;
+    border-radius: 360px;
+    padding: 5px;
+  }
+  
+  /* ============================
+     Lightbox
+     ============================ */
+  .lightbox-overlay img {
+    margin: 30px;
+    height: 100%; 
+    max-width: 100%; 
+    max-height: 95%; 
+    object-fit: contain; 
+    vertical-align: middle;
+    justify-content: center;
+  }
+  
+
+   /* ============================
+     Popup document 
+     ============================ */
+
+
+     /* Style de la fenêtre modale */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+  background-color: #fff;
+  margin: 5% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+  max-width: 500px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.close-btn {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.close-btn:hover,
+.close-btn:focus {
+  color: black;
+  text-decoration: none;
+}
+
+/* Style pour le bouton d'ouverture */
+.open-modal-btn {
+  padding: 10px 20px;
+  background-color: #f08307; /* couleur orange */
+  color: black; /* Texte en blanc */
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 16px;
+  display: inline-block; /* Centrage horizontal */
+  text-align: center;
+  transition: background-color 0.3s ease; /* Transition survol */
+}
+
+.open-modal-btn:hover {
+  background-color: #8c4c04; /* Orange plus foncé au survol */
+  color: white;
+}
+
+/* Centrage du bouton */
+.popup-container {
+  display: flex;
+  justify-content: center; /* Centrage horizontal */
+  align-items: center; /* Centrage vertical (si nécessaire) */
+  height: 100%; /* Prend toute la hauteur */
+  margin-top: 20px; /* Optionnel : espace au-dessus */
+}
+
+/* Style pour le bouton d'upload */
+.upload-btn {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.upload-btn:hover {
+  background-color: #45a049;
+}
+
+
+.cancel-btn {
+  background-color: #f44336; /* Rouge pour indiquer l'annulation */
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.cancel-btn:hover {
+  background-color: #d32f2f; /* Rouge plus foncé au survol */
+}
+
+.cancel-btn {
+  background-color: #f44336; /* Rouge */
+  color: white;
+  border: none;
+}
+
+.cancel-btn:hover {
+  background-color: #d32f2f; /* Rouge plus foncé */
+  transform: translateY(-2px); /* Effet de clic */
+}
+
+
+
+
+ /* ============================
+     Popup evenement
+     ============================ */
+     .modal {
+      display: none; /* Par défaut, caché */
+      position: fixed;
+      z-index: 10;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: auto; /* Permet de scroller si nécessaire */
+      margin-bottom: 200px;
+      padding: 20px;
+  }
+  
+  .modal-content {
+      background-color: white;
+      border-radius: 5px;
+      width: 100%;
+      max-width: 400px; /* Taille maximale du popup */
+      max-height: 74vh; /* Limite la hauteur pour s'assurer qu'il est toujours visible */
+      overflow-y: auto; /* Scroll interne pour le contenu si nécessaire */
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      padding: 20px;
+      box-sizing: border-box;
+  }
+  
+  .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+  }
+  
+  .modal-header h5 {
+      margin: 0;
+      font-size: 18px;
+  }
+  
+  .close {
+      font-size: 24px;
+      cursor: pointer;
+      color: #333;
+      background: none;
+      border: none;
+  }
+  
+  .form-control {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      box-sizing: border-box;
+  }
+  
+  .form-control:focus {
+      border-color: #007bff;
+      outline: none;
+  }
+  
+  .btn-submit {
+      display: inline-block;
+      background-color: #28a745;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: background-color 0.3s;
+  }
+  
+  .btn-submit:hover {
+      background-color: #218838;
+  }
+  
+  .overlay {
+      background-color: rgba(0, 0, 0, 0.5);
+  }
