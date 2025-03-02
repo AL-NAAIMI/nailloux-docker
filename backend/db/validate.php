@@ -84,18 +84,22 @@ function register_user($pseudo, $password, $email, $prenom, $nom, $pdo) {
         return "Erreur : Le pseudo est déjà pris.";
     }
 
-    // Hachage du mot de passe
-    $hashed_pswd = password_hash($password, PASSWORD_BCRYPT);
+// Hachage du mot de passe
+$hashed_pswd = password_hash($password, PASSWORD_BCRYPT);
+$default_photo = '';  // Définit une valeur par défaut pour photo_profil
 
-    // Insertion de l'utilisateur
-    $sql = "INSERT INTO `utilisateur` (`pseudo`, `prenom`, `nom`, `email`, `password`) 
-            VALUES (:pseudo, :prenom, :nom, :email, :password)";
-    $stmt = $pdo->prepare($sql);
-    $stmt->bindParam(':pseudo', $pseudo, PDO::PARAM_STR);
-    $stmt->bindParam(':prenom', $prenom, PDO::PARAM_STR);
-    $stmt->bindParam(':nom', $nom, PDO::PARAM_STR);
-    $stmt->bindParam(':email', $email, PDO::PARAM_STR);
-    $stmt->bindParam(':password', $hashed_pswd, PDO::PARAM_STR);
+// Insertion de l'utilisateur
+$sql = "INSERT INTO `utilisateur` (`pseudo`, `prenom`, `nom`, `email`, `password`, `photo_profil`) 
+        VALUES (:pseudo, :prenom, :nom, :email, :password, :photo_profil)";
+$stmt = $pdo->prepare($sql);
+$stmt->bindParam(':pseudo', $pseudo, PDO::PARAM_STR);
+$stmt->bindParam(':prenom', $prenom, PDO::PARAM_STR);
+$stmt->bindParam(':nom', $nom, PDO::PARAM_STR);
+$stmt->bindParam(':email', $email, PDO::PARAM_STR);
+$stmt->bindParam(':password', $hashed_pswd, PDO::PARAM_STR);
+$stmt->bindParam(':photo_profil', $default_photo, PDO::PARAM_STR);
+
+
 
     if ($stmt->execute()) {
         return "Inscription réussie.";

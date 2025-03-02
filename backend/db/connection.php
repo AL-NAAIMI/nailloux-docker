@@ -1,7 +1,7 @@
 <?php
 // Informations de connexion à la base de données
 $host = "localhost";
-$db = "nailloux_db"; // Utiliser le nom exact de la base
+$db = "nailloux"; // Utiliser le nom exact de la base
 $user = "nailloux_user"; // Utilisateur MySQL défini dans le script
 $pswd = "SuperSecretNot@@!m12d156p143"; 
 
