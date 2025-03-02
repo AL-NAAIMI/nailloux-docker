@@ -2,6 +2,7 @@
 include __DIR__ . '/../db/connection.php';
 include __DIR__ . '/../../back/env.php';
 include __DIR__ . '/exif_functions.php';
+session_set_cookie_params(0, '/');
 
 session_start();
 // Validation CSRF
