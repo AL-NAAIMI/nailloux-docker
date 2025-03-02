@@ -1,8 +1,8 @@
 <?php if (isset($_SESSION['pseudo']) && isset($_SESSION['id'])) : ?>
     <?php
-    if (empty($_SESSION['csrf_token'])) {
-        $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
-    }
+    // if (empty($_SESSION['csrf_token'])) {
+    //     $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+    // }
     ?>
  
     <!-- Stylesheet du pop-up pour les détails de la photo sélectionnée -->
@@ -13,7 +13,7 @@
         <input type="hidden" name="user_id" id="user_id" value="<?php echo htmlspecialchars($_SESSION['id']); ?>">
         <input type="hidden" name="pseudo" id="pseudo" value="<?php echo htmlspecialchars($_SESSION['pseudo']); ?>">
         <input type="hidden" name="redirect" id="redirect" value="feed.php">
-        <input type="hidden" name="csrf_token" value="<?php echo htmlspecialchars($_SESSION['csrf_token']); ?>">
+        <!-- <input type="hidden" name="csrf_token" value="<?php echo htmlspecialchars($_SESSION['csrf_token']); ?>"> -->
 
         <!-- File input -->
         <input type="file" name="postimage" accept=".jpg, .png, .jpeg, .webp" id="postimage" onchange="openPopUp()">

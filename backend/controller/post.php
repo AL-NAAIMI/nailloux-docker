@@ -9,11 +9,11 @@ include __DIR__ . '/../../back/env.php';
 // include __DIR__ . '/exif_functions.php';
 
 // Validation CSRF
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    if (empty($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
-        die("Token CSRF invalide.");
-    }
-}
+// if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+//     if (empty($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
+//         die("Token CSRF invalide.");
+//     }
+// }
 
 // Récupération des données envoyées
 $message = $_POST['post'];
