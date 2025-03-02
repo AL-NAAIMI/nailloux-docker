@@ -1,7 +1,7 @@
 <?php
 // Inclusion des fichiers nécessaires
-include __DIR__ . '/../db/connection.php';// Connexion à la base de données
-include __DIR__ . '/../../back/env.php';// Fichier d'environnement
+include __DIR__ . '/../db/connection.php'; // Connexion à la base de données
+include __DIR__ . '/../../back/env.php';     // Fichier d'environnement
 
 // Démarrage de la session si nécessaire
 if (session_status() !== PHP_SESSION_ACTIVE) {
@@ -30,8 +30,6 @@ $login = 0;
 
 // Fonction de validation pour la connexion
 function validate($pseudo, $password, $pdo) {
-    
-
     // Requête préparée pour éviter les injections SQL
     $sql = "SELECT `id`, `pseudo`, `password` FROM `utilisateur` WHERE `pseudo` = :pseudo";
     $stmt = $pdo->prepare($sql);
@@ -84,22 +82,20 @@ function register_user($pseudo, $password, $email, $prenom, $nom, $pdo) {
         return "Erreur : Le pseudo est déjà pris.";
     }
 
-// Hachage du mot de passe
-$hashed_pswd = password_hash($password, PASSWORD_BCRYPT);
-$default_photo = '';  // Définit une valeur par défaut pour photo_profil
+    // Hachage du mot de passe
+    $hashed_pswd = password_hash($password, PASSWORD_BCRYPT);
+    $default_photo = '';  // Définit une valeur par défaut pour photo_profil
 
-// Insertion de l'utilisateur
-$sql = "INSERT INTO `utilisateur` (`pseudo`, `prenom`, `nom`, `email`, `password`, `photo_profil`) 
-        VALUES (:pseudo, :prenom, :nom, :email, :password, :photo_profil)";
-$stmt = $pdo->prepare($sql);
-$stmt->bindParam(':pseudo', $pseudo, PDO::PARAM_STR);
-$stmt->bindParam(':prenom', $prenom, PDO::PARAM_STR);
-$stmt->bindParam(':nom', $nom, PDO::PARAM_STR);
-$stmt->bindParam(':email', $email, PDO::PARAM_STR);
-$stmt->bindParam(':password', $hashed_pswd, PDO::PARAM_STR);
-$stmt->bindParam(':photo_profil', $default_photo, PDO::PARAM_STR);
-
-
+    // Insertion de l'utilisateur
+    $sql = "INSERT INTO `utilisateur` (`pseudo`, `prenom`, `nom`, `email`, `password`, `photo_profil`) 
+            VALUES (:pseudo, :prenom, :nom, :email, :password, :photo_profil)";
+    $stmt = $pdo->prepare($sql);
+    $stmt->bindParam(':pseudo', $pseudo, PDO::PARAM_STR);
+    $stmt->bindParam(':prenom', $prenom, PDO::PARAM_STR);
+    $stmt->bindParam(':nom', $nom, PDO::PARAM_STR);
+    $stmt->bindParam(':email', $email, PDO::PARAM_STR);
+    $stmt->bindParam(':password', $hashed_pswd, PDO::PARAM_STR);
+    $stmt->bindParam(':photo_profil', $default_photo, PDO::PARAM_STR);
 
     if ($stmt->execute()) {
         return "Inscription réussie.";
@@ -118,7 +114,7 @@ if (isset($_POST['lgn']) && $pseudo && $password) {
         echo '</script>';
     } else {
         // Message d'erreur si la connexion échoue
-        alert_message("Nom d'utilisateur ou mot de passe incorrect.", '/frontend/view/index.php');
+        alert_message("Nom d'utilisateur ou mot de passe incorrect.", '/view/index.php');
     }
 } elseif (isset($_POST['regst'])) {
     // Inscription
@@ -128,11 +124,11 @@ if (isset($_POST['lgn']) && $pseudo && $password) {
         // Redirection après inscription réussie
         echo '<script>';
         echo 'alert("Inscription réussie !");';
-        echo 'window.location.href = "/view/account.php?pseudo=' . $pseudo . '";';
+        echo 'window.location.href = "/view/account.php?pseudo=' . urlencode($pseudo) . '";';
         echo '</script>';
     } else {
         // Affichage des erreurs d'inscription
-        alert_message($result, '/frontend/view/index.php');
+        alert_message($result, '/view/index.php');
     }
 }
 
