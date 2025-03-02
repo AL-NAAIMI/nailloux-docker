@@ -2,7 +2,6 @@
 include __DIR__ . '/../../back/env.php';
 include __DIR__ . '/../../backend/sql/publication.php';
 include __DIR__ . '/../../backend/sql/utilisateur.php';
-session_set_cookie_params(0, '/');
 session_start();
 include __DIR__ . '/../../backend/db/connection.php';
 
