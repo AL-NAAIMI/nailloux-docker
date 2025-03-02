@@ -1,39 +1,26 @@
 <?php
 // Fichier : logout.php 
 // Description : Ce fichier gère la déconnexion de l'utilisateur en supprimant ses données de session
-// et en le redirigeant vers la page d'accueil
+// et en le redirigeant vers la page d'accueil.
 
-// Inclusion du fichier de configuration contenant les variables d'environnement (par exemple : URL de la page d'accueil)
+// Inclusion du fichier d'environnement
 include __DIR__ . "/env.php";
 
-//session_start
-// Démarrage de la session pour pouvoir manipuler les données de session.
+// Démarrage de la session si nécessaire
 if (session_status() !== PHP_SESSION_ACTIVE) {
     session_start();
 }
 
-// Vérification si un utilisateur est connecté en vérifiant la présence d'une variable de session 'pseudo'
+// Si l'utilisateur est connecté, on supprime toutes les variables de session et on détruit la session
 if (isset($_SESSION['pseudo'])) {
-    // Si l'utilisateur est connecté, on supprime toutes les variables de session
     session_unset();
-    
-    // On détruit la session pour réellement déconnecter l'utilisateur
     session_destroy();
-
-    // Redirection vers la page d'accueil après la déconnexion
-    echo '
-    <script>
-        window.location="'.$page_accueil.'";
-    </script>
-    ';
-    exit; // On termine l'exécution du script après la redirection
+    // Redirection vers page_accueil après la déconnexion
+    echo '<script>window.location.href = "' . $page_accueil . '";</script>';
+    exit;
 } else {
-    // Si l'utilisateur n'était pas connecté (pas de session active), on le redirige simplement vers la page d'accueil
-    echo '
-    <script>
-        window.location="'.$home_page.'";
-    </script>
-    ';
-    exit; // On termine l'exécution du script après la redirection
+    // Si l'utilisateur n'était pas connecté, redirige vers home_page
+    echo '<script>window.location.href = "' . $home_page . '";</script>';
+    exit;
 }
 ?>
