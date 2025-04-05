@@ -6,7 +6,7 @@
     ?>
  
     <!-- Stylesheet du pop-up pour les détails de la photo sélectionnée -->
-    <link rel="stylesheet" type="text/css" href="/view/style/lighttheme_css/light_script_formulaire_pour_poster.css">
+    <link rel="stylesheet" type="text/css" href="/frontend/view/style/lighttheme_css/light_script_formulaire_pour_poster.css">
 
     <div class="feed-posting-box">
     <form id="postForm" onsubmit="confirmPost(event)" action="/backend/controller/post.php" method="post" enctype="multipart/form-data">

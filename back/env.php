@@ -10,6 +10,6 @@ $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off'
 $base_url = $protocol . "://" . $_SERVER['HTTP_HOST'];
 
 // Définition des variables d'environnement dynamiques
-$home_page = $base_url . "/view/about-us.php";
-$page_accueil = $base_url . "/view/pagep.php";
+$home_page = $base_url . "/frontend/view/about-us.php";
+$page_accueil = $base_url . "/frontend/view/pagep.php";
 ?>

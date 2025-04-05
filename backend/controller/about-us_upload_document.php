@@ -23,7 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
             $stmt->execute([':id_document' => $id_document]);
 
             // Rediriger après suppression avec un message de succès
-            echo "<script>alert('Document supprimé avec succès.'); window.location.href = '/view/about-us.php?tab=file';</script>";
+            echo "<script>alert('Document supprimé avec succès.'); window.location.href = '/frontend/view/about-us.php?tab=file';</script>";
             exit();
         } catch (PDOException $e) {
             // Gestion des erreurs PDO lors de la suppression

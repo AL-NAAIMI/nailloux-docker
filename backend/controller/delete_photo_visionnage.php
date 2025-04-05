@@ -41,7 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         ]);
 
         // Redirection
-        header("Location: /view/about-us/event_details.php?id=$eventId&photo_deleted=1");
+        header("Location: /frontend/view/about-us/event_details.php?id=$eventId&photo_deleted=1");
         exit;
     } catch (PDOException $e) {
         die("Erreur lors de la suppression : " . $e->getMessage());

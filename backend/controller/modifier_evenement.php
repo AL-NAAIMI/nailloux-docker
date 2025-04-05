@@ -1,42 +1,47 @@
 <?php
-include __DIR__ . '../../db/connection.php';
-include __DIR__ . '../../sql/utilisateur.php';
+include $_SERVER['DOCUMENT_ROOT'] . '/backend/db/connection.php';
+include $_SERVER['DOCUMENT_ROOT'] . '/backend/sql/utilisateur.php';
 session_start();
 
 // Vérifier si l'utilisateur est authentifié
 if (!isset($_SESSION['id'])) {
-    die("Vous devez être connecté pour accéder à cette page.");
+    header("Location: /frontend/view/about-us.php?tab=event");
+    exit;
 }
 
+// Récupération des paramètres
+$eventId = isset($_GET['id']) ? intval($_GET['id']) : 0;
+
+if ($eventId <= 0) {
+    header("Location: /frontend/view/about-us.php?tab=event");
+    exit;
+}
+
+// Vérifier si l'utilisateur a les droits de modifier (admin ou propriétaire)
 $userId = $_SESSION['id'];
-$role = $_SESSION['role'] ?? null;
-
-// Vérifier si l'ID de l'événement est fourni
-if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {
-    die("ID de l'événement manquant ou invalide.");
-}
-
-$eventId = (int)$_GET['id'];
+$isAdmin = isset($_SESSION['admin']) && $_SESSION['admin'] == true;
 
 try {
-    // Récupérer les détails de l'événement
-    $query = "SELECT * FROM evenement WHERE id_evenement = :id_evenement";
+    // Vérifier si l'utilisateur est autorisé à modifier l'événement
+    $query = "SELECT * FROM evenement WHERE id_evenement = :id";
     $stmt = $pdo->prepare($query);
-    $stmt->bindParam(':id_evenement', $eventId, PDO::PARAM_INT);
+    $stmt->bindParam(':id', $eventId, PDO::PARAM_INT);
     $stmt->execute();
-
     $event = $stmt->fetch(PDO::FETCH_ASSOC);
 
     if (!$event) {
-        die("Événement introuvable.");
+        header("Location: /frontend/view/about-us.php?tab=event&error=event_not_found");
+        exit;
     }
 
-    // Vérifier si l'utilisateur est autorisé à modifier l'événement
-    if ($event['uid'] != $userId && $role !== 'Administrateur') {
-        die("Vous n'êtes pas autorisé à modifier cet événement.");
+    // Si l'utilisateur n'est pas admin et n'est pas le créateur
+    if (!$isAdmin && $event['uid'] != $userId) {
+        header("Location: /frontend/view/about-us.php?tab=event&error=not_authorized");
+        exit;
     }
 } catch (PDOException $e) {
-    die("Erreur lors de la récupération des données : " . $e->getMessage());
+    header("Location: /frontend/view/about-us.php?tab=event&error=db_error");
+    exit;
 }
 ?>
 
@@ -45,9 +50,9 @@ try {
 <head>
     <meta charset="UTF-8">
     <title>Modifier l'Événement</title>
-    <link rel="stylesheet" href="/view/style/lighttheme_css/light_update_event_details.css?v=<?php echo time(); ?>">
+    <link rel="stylesheet" href="/frontend/view/style/lighttheme_css/light_update_event_details.css?v=<?php echo time(); ?>">
 </head>
 <body>
-    <?php include __DIR__ . '../../../frontend/view/about-us/event_details_modify.php'; ?>
+    <?php include $_SERVER['DOCUMENT_ROOT'] . '/frontend/view/about-us/event_details_modify.php'; ?>
 </body>
 </html>

@@ -325,7 +325,7 @@ function confirmLogout(event) {
     }).then((result) => {
         if (result.isConfirmed) {
             // Si l'utilisateur confirme, redirige vers le script de déconnexion
-            window.location.href = '/Nailloux/back/logout.php'; // Chemin corrigé
+            window.location.href = '/back/logout.php'; // Chemin mis à jour pour Docker
         }
     });
 

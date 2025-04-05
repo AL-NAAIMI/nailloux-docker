@@ -1,5 +1,5 @@
 <?php
-include __DIR__ . '/../../backend/db/connection.php';
+include $_SERVER['DOCUMENT_ROOT'] . '/backend/db/connection.php';
 session_start();
 
 // Vérifier si l'utilisateur est connecté
@@ -53,7 +53,7 @@ try {
     ]);
 
     // Redirection après succès
-    header("Location: /view/about-us.php?tab=event");
+    header("Location: /frontend/view/about-us.php?tab=event");
     exit;
 } catch (PDOException $e) {
     die("Erreur lors de la mise à jour de l'événement : " . $e->getMessage());

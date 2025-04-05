@@ -1,2 +1,0 @@
-Bugs fixed :
--Cant choose a date in the future

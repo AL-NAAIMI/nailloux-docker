@@ -110,11 +110,11 @@ if (isset($_POST['lgn']) && $pseudo && $password) {
     if (validate($pseudo, $password, $pdo) === true) {
         // Redirection après connexion réussie
         echo '<script>';
-        echo 'window.location.href = "/view/account.php?pseudo=' . urlencode($pseudo) . '";';
+        echo 'window.location.href = "/frontend/view/account.php?pseudo=' . urlencode($pseudo) . '"';
         echo '</script>';
     } else {
         // Message d'erreur si la connexion échoue
-        alert_message("Nom d'utilisateur ou mot de passe incorrect.", '/view/index.php');
+        alert_message("Nom d'utilisateur ou mot de passe incorrect.", '/frontend/view/index.php');
     }
 } elseif (isset($_POST['regst'])) {
     // Inscription
@@ -124,11 +124,11 @@ if (isset($_POST['lgn']) && $pseudo && $password) {
         // Redirection après inscription réussie
         echo '<script>';
         echo 'alert("Inscription réussie !");';
-        echo 'window.location.href = "/view/account.php?pseudo=' . urlencode($pseudo) . '";';
+        echo 'window.location.href = "/frontend/view/account.php?pseudo=' . urlencode($pseudo) . '"';
         echo '</script>';
     } else {
         // Affichage des erreurs d'inscription
-        alert_message($result, '/view/index.php');
+        alert_message($result, '/frontend/view/index.php');
     }
 }
 

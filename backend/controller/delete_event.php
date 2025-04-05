@@ -1,10 +1,10 @@
 <?php
-include __DIR__ . '/../../backend/db/connection.php';
+include $_SERVER['DOCUMENT_ROOT'] . '/backend/db/connection.php';
 session_start();
 
 // Vérifier si l'utilisateur est authentifié
 if (!isset($_SESSION['id'])) {
-    header("Location: /view/about-us.php?tab=event&error=not_authenticated");
+    header("Location: /frontend/view/about-us.php?tab=event&error=not_authenticated");
     exit;
 }
 
@@ -14,7 +14,7 @@ $role = $_SESSION['role'] ?? null; // Récupérer le rôle (par défaut null si 
 
 // Vérifier si l'ID de l'événement a été fourni
 if (!isset($_POST['id']) || empty($_POST['id'])) {
-    header("Location: /view/about-us.php?tab=event&error=missing_id");
+    header("Location: /frontend/view/about-us.php?tab=event&error=missing_id");
     exit;
 }
 
@@ -29,7 +29,7 @@ try {
     $event = $checkStmt->fetch(PDO::FETCH_ASSOC);
 
     if (!$event || ($event['uid'] != $uid && $role !== 'Administrateur')) {
-        header("Location: /view/about-us.php?tab=event&error=not_authorized");
+        header("Location: /frontend/view/about-us.php?tab=event&error=not_authorized");
         exit;
     }
 
@@ -48,14 +48,14 @@ $pdo->exec("SET FOREIGN_KEY_CHECKS=1");
     // Vérifier si la suppression a eu lieu
     if ($deleteStmt->rowCount() > 0) {
         // Redirection en cas de succès
-        header("Location: /view/about-us.php?tab=event&success=event_deleted");
+        header("Location: /frontend/view/about-us.php?tab=event&success=event_deleted");
         exit;
     } else {
-        header("Location: /view/about-us.php?tab=event&error=not_found");
+        header("Location: /frontend/view/about-us.php?tab=event&error=not_found");
         exit;
     }
 } catch (PDOException $e) {
     // Gestion des erreurs
-    header("Location: /view/about-us.php?tab=event&error=db_error");
+    header("Location: /frontend/view/about-us.php?tab=event&error=db_error");
     exit;
 }

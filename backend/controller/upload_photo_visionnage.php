@@ -64,7 +64,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $userId = $_SESSION['id'] ?? null;
 
     if (!$userId) {
-        header("Location: /view/about-us/event_details.php?id=$eventId&error=Vous devez être connecté pour déposer des photos.");
+        header("Location: /frontend/view/about-us/event_details.php?id=$eventId&error=Vous devez être connecté pour déposer des photos.");
         exit;
     }
     // Vérifier si l'utilisateur est inscrit à l'événement
@@ -77,17 +77,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $estInscrit = $checkInscriptionStmt->rowCount() > 0;
 
     if (!$estInscrit) {
-        header("Location: /view/about-us/event_details.php?id=$eventId&error=Vous devez être inscrit à cet événement pour téléverser des photos.");
+        header("Location: /frontend/view/about-us/event_details.php?id=$eventId&error=Vous devez être inscrit à cet événement pour téléverser des photos.");
         exit;
     }
 
     if (!$eventId || !is_numeric($eventId)) {
-        header("Location: /view/about-us/event_details.php?error=ID d'événement invalide.");
+        header("Location: /frontend/view/about-us/event_details.php?error=ID d'événement invalide.");
         exit;
     }
 
     if (!isset($_FILES['photos']) || empty($_FILES['photos']['name'][0])) {
-        header("Location: /view/about-us/event_details.php?id=$eventId&error=Aucun fichier sélectionné.");
+        header("Location: /frontend/view/about-us/event_details.php?id=$eventId&error=Aucun fichier sélectionné.");
         exit;
     }
 
@@ -104,7 +104,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $currentPhotoCount = (int) $result['total_photos'];
 
     if ($currentPhotoCount >= $maxFiles) {
-        header("Location: /view/about-us/event_details.php?id=$eventId&error=Vous avez déjà atteint la limite de 10 photos.");
+        header("Location: /frontend/view/about-us/event_details.php?id=$eventId&error=Vous avez déjà atteint la limite de 10 photos.");
         exit;
     }
 
@@ -151,9 +151,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 
-    header("Location: /view/about-us/event_details.php?id=$eventId&success=$uploadedCount photo(s) téléversée(s) avec succès.");
+    header("Location: /frontend/view/about-us/event_details.php?id=$eventId&success=$uploadedCount photo(s) téléversée(s) avec succès.");
     exit;
 } else {
-    header("Location: /view/about-us/event_details.php?error=Requête invalide.");
+    header("Location: /frontend/view/about-us/event_details.php?error=Requête invalide.");
     exit;
 }

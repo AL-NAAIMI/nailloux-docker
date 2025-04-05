@@ -177,7 +177,7 @@ if (session_status() == PHP_SESSION_NONE) {
                         eventMarker.addEventListener('click', function() {
                             const eventId = eventMarker.getAttribute('data-id');
                             // Redirection vers detail.php avec l'ID de l'événement
-                            window.location.href = `/view/about-us/event_details.php?id=${eventId}`;
+                            window.location.href = `/frontend/view/about-us/event_details.php?id=${eventId}`;
                         });
 
                         dayCell.appendChild(eventMarker);

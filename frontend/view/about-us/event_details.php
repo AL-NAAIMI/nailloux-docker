@@ -114,7 +114,7 @@ try {
             <div class="upload-photos">
                 <h2>Déposer vos photos</h2>
                 <p>Maintenez la touche Ctrl (ou Cmd sur Mac) enfoncée pour sélectionner plusieurs photos.</p>
-                <form action="../../../backend/controller/upload_photo_visionnage.php" method="post" enctype="multipart/form-data">
+                <form action="/backend/controller/upload_photo_visionnage.php" method="post" enctype="multipart/form-data">
                     <input type="hidden" name="id_evenement" value="<?php echo $event['id_evenement']; ?>">
                     <label for="photos">Sélectionnez jusqu'à 10 photos :</label>
                     <input type="file" name="photos[]" id="photos" style="display:block;" accept="image/*" multiple>
@@ -135,7 +135,7 @@ try {
     <!-- Bouton de modification de l'événement si l'utilisateur est admin ou propriétaire de l'événement -->
     <?php if ($isAdmin || $event['uid'] == $userId): ?>
         <h2>Modifier l'événement</h2>
-        <form action="../../../backend/controller/modifier_evenement.php" method="get">
+        <form action="/backend/controller/modifier_evenement.php" method="get">
             <input type="hidden" name="id" value="<?php echo $event['id_evenement']; ?>">
             <button type="submit" class="modify-button">Modifier l'Événement</button>
         </form>
@@ -152,7 +152,7 @@ try {
                     <?php foreach ($userPhotos as $photo): ?>
                         <li>
                             <img src="/upload/photos_evenement/<?php echo htmlspecialchars($photo['chemin_photo']); ?>" alt="Photo de l'événement">
-                            <form action="../../../backend/controller/delete_photo_visionnage.php" method="post" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cette photo ?');">
+                            <form action="/backend/controller/delete_photo_visionnage.php" method="post" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cette photo ?');">
                                 <input type="hidden" name="photo_id" value="<?php echo $photo['id_photo']; ?>">
                                 <input type="hidden" name="event_id" value="<?php echo $eventId; ?>">
                                 <button type="submit">Supprimer</button>
@@ -167,12 +167,12 @@ try {
     <!-- Boutons pour s'inscrire ou annuler l'inscription (selon que l'utilisateur est déjà inscrit) -->
     <?php if (isset($_SESSION['id'])): ?>
         <?php if ($estInscrit): ?>
-            <form action="../../../backend/controller/annuler_inscription_evenement.php" method="post">
+            <form action="/backend/controller/annuler_inscription_evenement.php" method="post">
                 <input type="hidden" name="id_evenement" value="<?php echo $event['id_evenement']; ?>">
                 <button type="submit" class="cancel-signup-button">Annuler l'inscription</button>
             </form>
         <?php else: ?>
-            <form action="../../../backend/controller/inscription_evenement.php" method="post">
+            <form action="/backend/controller/inscription_evenement.php" method="post">
                 <input type="hidden" name="id_evenement" value="<?php echo $event['id_evenement']; ?>">
                 <button type="submit" class="sign-up-button">S'inscrire à l'Événement</button>
             </form>
@@ -181,7 +181,7 @@ try {
 
     <!-- Formulaire de suppression de l'événement si l'utilisateur est admin ou propriétaire -->
     <?php if ($isAdmin || $event['uid'] == $userId): ?>
-        <form action="../../../backend/controller/delete_event.php" method="post" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cet événement ?');">
+        <form action="/backend/controller/delete_event.php" method="post" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cet événement ?');">
             <input type="hidden" name="id" value="<?php echo $event['id_evenement']; ?>">
             <button type="submit" class="delete-button">Supprimer l'Événement</button>
         </form>

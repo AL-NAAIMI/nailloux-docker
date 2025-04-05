@@ -1,13 +1,13 @@
 <?php
-include __DIR__ . '../../db/connection.php';
-include __DIR__ . '../../sql/utilisateur.php';
+include $_SERVER['DOCUMENT_ROOT'] . '/backend/db/connection.php';
+include $_SERVER['DOCUMENT_ROOT'] . '/backend/sql/utilisateur.php';
 session_start();
 
 // Vérifier si l'utilisateur est connecté
 if (!isset($_SESSION['id'])) {
     echo "<script>
         alert('Vous devez être connecté pour annuler votre inscription.');
-        window.location.href = '../../view/about-us.php?tab=event';
+        window.location.href = '/frontend/view/about-us.php?tab=event';
     </script>";
     exit;
 }
@@ -19,7 +19,7 @@ $id_evenement = $_POST['id_evenement'] ?? null;
 if (!$id_evenement) {
     echo "<script>
         alert('ID de l\'événement manquant.');
-        window.location.href = '../../view/about-us.php?tab=event';
+        window.location.href = '/frontend/view/about-us.php?tab=event';
     </script>";
     exit;
 }
@@ -36,18 +36,18 @@ try {
     if ($deleteStmt->rowCount() > 0) {
         echo "<script>
             alert('Votre inscription a été annulée avec succès.');
-            window.location.href = '../../view/about-us.php?tab=event';
+            window.location.href = '/frontend/view/about-us.php?tab=event';
         </script>";
     } else {
         echo "<script>
             alert('Vous n\'étiez pas inscrit à cet événement.');
-            window.location.href = '../../view/about-us.php?tab=event';
+            window.location.href = '/frontend/view/about-us.php?tab=event';
         </script>";
     }
 } catch (PDOException $e) {
     echo "<script>
         alert('Erreur lors de l\'annulation de l\'inscription : " . addslashes($e->getMessage()) . "');
-        window.location.href = '../../view/about-us.php?tab=event';
+        window.location.href = '/frontend/view/about-us.php?tab=event';
     </script>";
 }
 ?>

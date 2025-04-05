@@ -1,5 +1,4 @@
 <?php
-// Docker database connection configuration
 // Informations de connexion à la base de données
 $host = "db"; // Service name in docker-compose
 $db = "nailloux";
@@ -11,13 +10,15 @@ try {
     // Force TCP connection with explicit TCP protocol
     $dsn = "mysql:host=$host;port=3306;dbname=$db;charset=utf8mb4";
     
-    // Set PDO options with timeout and disable persistent connections
+    // Set PDO options with longer timeout and disable persistent connections
     $options = [
         PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION, 
         PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC, 
         PDO::ATTR_EMULATE_PREPARES => false, 
-        PDO::ATTR_TIMEOUT => 10, 
+        PDO::ATTR_TIMEOUT => 5, 
         PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8mb4",
+        // Disable socket connections
+        PDO::MYSQL_ATTR_DIRECT_QUERY => true,
     ];
     
     // Create new PDO connection

@@ -1,3 +1,0 @@
-Bugs fixed :
--Cant choose a date in the future.
--Resotred files that was deleted in pu

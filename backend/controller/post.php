@@ -1,30 +1,39 @@
 <?php
-// Ensure the session cookie is available throughout the domain
+// Start the session at the very beginning before any output
 session_set_cookie_params(0, '/');
 session_start();
 
 include __DIR__ . '/../db/connection.php';
 include __DIR__ . '/../../back/env.php';
-// (Optional) Remove or comment out the include for exif_functions.php if you're now handling EXIF inline
-// include __DIR__ . '/exif_functions.php';
 
-// Validation CSRF
-// if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-//     if (empty($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
-//         die("Token CSRF invalide.");
-//     }
-// }
+// Check for file size limit before processing
+if (isset($_SERVER['CONTENT_LENGTH']) && $_SERVER['CONTENT_LENGTH'] > 8388608) {
+    header("Location: /frontend/view/feed.php?error=file_too_large");
+    exit();
+}
 
-// Récupération des données envoyées
-$message = $_POST['post'];
-$user_id = $_POST['user_id'];
-$pseudo = $_POST['pseudo'];
+// Check if form was submitted
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+    header("Location: /frontend/view/feed.php");
+    exit();
+}
+
+// Récupération des données envoyées with proper validation
+$message = isset($_POST['post']) ? $_POST['post'] : '';
+$user_id = isset($_POST['user_id']) ? $_POST['user_id'] : '';
+$pseudo = isset($_POST['pseudo']) ? $_POST['pseudo'] : '';
 $public = isset($_POST['public']) ? 1 : 0;
-$photographe = $_POST['photographe'];  // Nouveau champ
-$titre = $_POST['titre'];              // Nouveau champ
-$datePrisePhoto = $_POST['datePrisePhoto'];      // Nouveau champ
-$motsCles = $_POST['motsCles'];        // Nouveau champ
-$auteur = $_POST['auteur'];            // Nouveau champ
+$photographe = isset($_POST['photographe']) ? $_POST['photographe'] : '';
+$titre = isset($_POST['titre']) ? $_POST['titre'] : '';
+$datePrisePhoto = isset($_POST['datePrisePhoto']) ? $_POST['datePrisePhoto'] : '';
+$motsCles = isset($_POST['motsCles']) ? $_POST['motsCles'] : '';
+$auteur = isset($_POST['auteur']) ? $_POST['auteur'] : '';
+
+// Validate essential data
+if (empty($user_id) || empty($pseudo)) {
+    header("Location: /frontend/view/feed.php?error=missing_user_data");
+    exit();
+}
 
 $max_width = 2048;
 $max_height = 2048;
@@ -32,16 +41,36 @@ $thumbnail_max_size = 512;
 $unique_name = null;
 
 // Vérifie si une image a été téléchargée
-if ($_FILES['postimage']['error'] == UPLOAD_ERR_NO_FILE) {
-    header("Location: /view/account.php?pseudo=" . $pseudo . "&error=image_required");
+if (!isset($_FILES['postimage']) || $_FILES['postimage']['error'] == UPLOAD_ERR_NO_FILE) {
+    header("Location: /frontend/view/account.php?pseudo=" . urlencode($pseudo) . "&error=image_required");
+    exit();
+}
+
+// Check if the file size exceeds the limit (8MB)
+if ($_FILES['postimage']['error'] == UPLOAD_ERR_INI_SIZE || $_FILES['postimage']['error'] == UPLOAD_ERR_FORM_SIZE) {
+    header("Location: /frontend/view/feed.php?error=file_too_large");
+    exit();
+}
+
+// Check for other upload errors
+if ($_FILES['postimage']['error'] != UPLOAD_ERR_OK) {
+    header("Location: /frontend/view/feed.php?error=upload_error&code=" . $_FILES['postimage']['error']);
     exit();
 }
 
 // Validation de l'extension et détection du type MIME
 $allowed_extensions = ['jpg', 'jpeg', 'png', 'webp'];
 $imageext = strtolower(pathinfo($_FILES['postimage']['name'], PATHINFO_EXTENSION));
+
+// Check file extension
+if (!in_array($imageext, $allowed_extensions)) {
+    header("Location: /frontend/view/feed.php?error=invalid_extension");
+    exit();
+}
+
 $imagetmpname = $_FILES['postimage']['tmp_name'];
 
+// Verify MIME type
 $finfo = finfo_open(FILEINFO_MIME_TYPE);
 $mime = finfo_file($finfo, $imagetmpname);
 finfo_close($finfo);
@@ -53,13 +82,15 @@ $mime_to_function = [
 ];
 
 if (!array_key_exists($mime, $mime_to_function)) {
-    die("Type MIME non supporté : " . htmlspecialchars($mime));
+    header("Location: /frontend/view/feed.php?error=invalid_mime_type");
+    exit();
 }
 
 $image_load_function = $mime_to_function[$mime];
 $source_image = @$image_load_function($imagetmpname);
 if (!$source_image) {
-    die("Erreur lors du chargement de l'image source.");
+    header("Location: /frontend/view/feed.php?error=image_load_failed");
+    exit();
 }
 
 // Redimensionnement si nécessaire
@@ -71,7 +102,8 @@ if ($width > $max_width || $height > $max_height) {
 
     $resized_image = imagecreatetruecolor($new_width, $new_height);
     if (!imagecopyresampled($resized_image, $source_image, 0, 0, 0, 0, $new_width, $new_height, $width, $height)) {
-        die("Erreur lors du redimensionnement de l'image.");
+        header("Location: /frontend/view/feed.php?error=resize_failed");
+        exit();
     }
     $final_image = $resized_image;
 } else {
@@ -106,7 +138,7 @@ try {
     
     // Déplacer le fichier téléchargé
     if (!move_uploaded_file($imagetmpname, $final_image_path)) {
-        die("Erreur lors du déplacement du fichier téléchargé.");
+        throw new Exception("Erreur lors du déplacement du fichier téléchargé.");
     }
     
     // --- EXIF Processing ---
@@ -153,14 +185,14 @@ try {
     
     $thumbnail_image = imagecreatetruecolor($thumbnail_width, $thumbnail_height);
     if (!imagecopyresampled($thumbnail_image, $source_image, 0, 0, 0, 0, $thumbnail_width, $thumbnail_height, $width, $height)) {
-        die("Erreur lors du redimensionnement de la miniature.");
+        throw new Exception("Erreur lors du redimensionnement de la miniature.");
     }
     
     $thumbnail_name = $pid . "_mini.png";
     $thumbnail_path = $upload_directory . $thumbnail_name;
     
     if (!imagepng($thumbnail_image, $thumbnail_path)) {
-        die("Erreur lors de la sauvegarde de la miniature.");
+        throw new Exception("Erreur lors de la sauvegarde de la miniature.");
     }
     
     imagedestroy($thumbnail_image);
@@ -175,11 +207,20 @@ try {
     
     // Redirection
     if (isset($_POST['redirect'])) {
-        header("Location: /view/" . $_POST['redirect']);
+        header("Location: /frontend/view/" . $_POST['redirect']);
     } else {
-        header("Location: " . $home_page . "/view/account.php?pseudo=" . $pseudo);
+        header("Location: /frontend/view/account.php?pseudo=" . urlencode($pseudo));
     }
     exit();
-} catch (PDOException $e) {
-    die("Erreur lors de la publication : " . $e->getMessage());
+} catch (Exception $e) {
+    // Delete database entry if image processing failed
+    if (isset($pid)) {
+        $delete_sql = "DELETE FROM `publication` WHERE `pid` = :pid";
+        $delete_stmt = $pdo->prepare($delete_sql);
+        $delete_stmt->bindParam(':pid', $pid, PDO::PARAM_INT);
+        $delete_stmt->execute();
+    }
+    
+    header("Location: /frontend/view/feed.php?error=post_failed&message=" . urlencode($e->getMessage()));
+    exit();
 }

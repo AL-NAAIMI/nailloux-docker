@@ -1,8 +1,0 @@
-Bugs to fix :
-s'inscrire à un événement visionnage avant de pouvoir déposer des fichiers
-dépôt de doc impossible si le document d'origine a le même nom (même si on change le nom via le site)
-dépôt d'un doc word (.docx) impossible
-besoin de recharger la page du compte lorsqu'on supprime un post (rendre automatique le reload)
-arriver sur l'onglet photo quand on recherche un utilisateur plutôt que l'onglet feed
-la limite de 10 photos sur visionnage peut être dépassée si on upload 10 photos puis qu'on recommence
-autoriser les accents et apostrophe dans l'inscription
