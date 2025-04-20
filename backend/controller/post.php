@@ -7,7 +7,7 @@ include __DIR__ . '/../db/connection.php';
 include __DIR__ . '/../../back/env.php';
 
 // Check for file size limit before processing
-if (isset($_SERVER['CONTENT_LENGTH']) && $_SERVER['CONTENT_LENGTH'] > 8388608) {
+if (isset($_SERVER['CONTENT_LENGTH']) && $_SERVER['CONTENT_LENGTH'] > 31457280) {
     header("Location: /frontend/view/feed.php?error=file_too_large");
     exit();
 }
@@ -46,8 +46,8 @@ if (!isset($_FILES['postimage']) || $_FILES['postimage']['error'] == UPLOAD_ERR_
     exit();
 }
 
-// Check if the file size exceeds the limit (8MB)
-if ($_FILES['postimage']['error'] == UPLOAD_ERR_INI_SIZE || $_FILES['postimage']['error'] == UPLOAD_ERR_FORM_SIZE) {
+// Check if the file size exceeds the limit (30MB)
+if ($_FILES['postimage']['error'] == UPLOAD_ERR_INI_SIZE || $_FILES['postimage']['error'] == UPLOAD_ERR_FORM_SIZE || $_FILES['postimage']['size'] > 31457280) {
     header("Location: /frontend/view/feed.php?error=file_too_large");
     exit();
 }
@@ -153,10 +153,14 @@ try {
     }
     // Encode metadata as JSON (or you can process it as needed)
     $metadata_json = json_encode($metadata);
+    // Ensure valid JSON or NULL for donnees_exif
+    if ($metadata_json === false || $metadata_json === null || $metadata_json === '' || $metadata_json === 'null' || empty($metadata)) {
+        $metadata_json = null;
+    }
     // Enregistrer les données EXIF dans la base de données (assumes 'donnees_exif' column exists)
     $sql_update_exif = "UPDATE `publication` SET `donnees_exif` = :donnees_exif WHERE `pid` = :pid";
     $stmt_exif = $pdo->prepare($sql_update_exif);
-    $stmt_exif->bindParam(':donnees_exif', $metadata_json, PDO::PARAM_STR);
+    $stmt_exif->bindParam(':donnees_exif', $metadata_json, PDO::PARAM_NULL | PDO::PARAM_STR);
     $stmt_exif->bindParam(':pid', $pid, PDO::PARAM_INT);
     $stmt_exif->execute();
     // --- End EXIF Processing ---

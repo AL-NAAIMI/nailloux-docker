@@ -1,3 +1,9 @@
+# ----------------------------------------
+# Dockerfile pour Nailloux-club : conteneurisation
+# Base : PHP 8.1 + Apache
+# Installation des extensions PHP (pdo_mysql, gd, exif) et de Python3-Pillow
+# ----------------------------------------
+
 FROM php:8.1-apache
 
 # Install system dependencies
@@ -12,8 +18,14 @@ RUN apt-get update && apt-get install -y \
     libfreetype6-dev \
     libonig-dev \
     libxml2-dev \
+    python3 \
+    python3-pip \
     && docker-php-ext-configure gd --with-jpeg --with-freetype \
     && docker-php-ext-install -j$(nproc) pdo_mysql mysqli zip exif gd
+
+# Install Python Pillow via apt (system pip install is blocked)
+RUN apt-get install -y python3-pil
+
 
 # Configure PHP - Increase file upload limits
 COPY php.ini /usr/local/etc/php/conf.d/php-custom.ini
