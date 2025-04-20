@@ -23,18 +23,17 @@ Documentation de la conteneurisation - Nailloux-club
      - ./upload et ./ nailloux.sql pour initialiser la base.
 
 4. Instructions d'utilisation
-   1) Placer le projet dans un répertoire local.
-   2) Lancer la construction et les containers :
-      docker compose up --build -d
-   3) Arrêter et supprimer :
-      docker compose down
-
-5. Bonnes pratiques
-   - Versionner Dockerfile et docker-compose.yml.
-   - Ne pas exposer de ports inutiles.
-   - Utiliser des variables d'environnement sécurisées.
-
-6. Références
-   - Documentation officielle Docker : https://docs.docker.com/
-   - PHP Docker Hub : https://hub.docker.com/_/php
-   - MySQL Docker Hub : https://hub.docker.com/_/mysql
+   Prérequis :
+     - Installer Docker et Docker Compose sur la machine.
+     - Cloner le dépôt Git et se placer dans le dossier du projet.
+   Étapes :
+     1) Cloner le projet :
+        git clone <url_du_repo> && cd Nailloux-club
+     2) Construire les images et démarrer les services :
+        docker compose up --build -d
+     3) Vérifier le statut des containers :
+        docker compose ps
+     4) Accéder à l’application :
+        Ouvrir dans un navigateur http://localhost:8080
+     6) Arrêter et supprimer les containers et le réseau :
+        docker compose down
