@@ -1,0 +1,103 @@
+= 📦 Documentation de la conteneurisation - Nailloux-club
+:toc:
+:toc-title: 📑 Sommaire
+:icons: emojis
+:sectnums:
+
+== 🚀 Introduction
+
+Cette documentation décrit la conteneurisation de l'application **Nailloux-club** à l'aide de Docker et Docker Compose. Elle explique comment l'environnement est configuré et comment le lancer localement.
+
+== 🐳 Dockerfile
+
+Le `Dockerfile` permet de créer une image personnalisée pour l'application PHP avec Apache.
+
+* `FROM php:8.1-apache`  
+  → Base : image officielle de PHP 8.1 avec Apache.
+
+* `RUN apt-get update && apt-get install -y ...`  
+  → Installation des dépendances nécessaires :
+  - Extensions PHP : `pdo_mysql`, `gd`, `exif`
+  - `python3` pour les besoins spécifiques
+
+* `RUN apt-get install -y python3-pil`  
+  → Installation de la bibliothèque *Pillow* pour la gestion d'images via le package Debian.
+
+* Configuration Apache  
+  → Copie des fichiers source, ajustement des permissions, et autres personnalisations.
+
+== 🧩 docker-compose.yml
+
+Le fichier `docker-compose.yml` orchestre les différents services de l'application.
+
+=== 🔧 Services
+
+* `app`  
+  - Construit à partir du `Dockerfile`  
+  - Expose le port `8080`  
+  - Monte le code source local
+
+* `db`  
+  - Utilise l'image officielle `mysql:8.0`  
+  - Initialise la base avec `nailloux.sql`  
+  - Monte un volume pour la persistance des données
+
+=== 🌐 Réseau
+
+* `nailloux-network`  
+  → Réseau de type *bridge* permettant la communication entre les services `app` et `db`.
+
+=== 💾 Volumes
+
+* `dbdata`  
+  → Stockage persistant des données MySQL.
+
+* `./upload`, `./nailloux.sql`  
+  → Fichiers utilisés pour l'initialisation de la base de données et le stockage des fichiers envoyés.
+
+== 🛠️ Instructions d'utilisation
+
+=== 📋 Prérequis
+
+* Avoir installé **Docker** et **Docker Compose** sur la machine
+* Avoir cloné le dépôt Git du projet
+
+=== 🧪 Étapes
+
+. Cloner le projet :
++
+[source, bash]
+----
+git clone <url_du_repo> && cd Nailloux-club
+----
+
+. Construire les images et démarrer les services :
++
+[source, bash]
+----
+docker compose up --build -d
+----
+
+. Vérifier le statut des conteneurs :
++
+[source, bash]
+----
+docker compose ps
+----
+
+. Accéder à l’application dans un navigateur :
++
+`http://localhost:8080`
+
+. Pour arrêter et supprimer les conteneurs ainsi que le réseau :
++
+[source, bash]
+----
+docker compose down
+----
+
+== ✅ Conclusion
+
+🎉 Votre application *Nailloux-club* est désormais conteneurisée et prête à être exécutée dans un environnement isolé avec Docker et Docker Compose.
+
+---
