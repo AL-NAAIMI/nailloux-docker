@@ -1,39 +1,91 @@
-Documentation de la conteneurisation - Nailloux-club
+= Documentation de la conteneurisation - Nailloux‑club
+== Introduction
 
-1. Introduction
-   Cette documentation explique comment l'application Nailloux-club est conteneurisée à l'aide de Docker.
+Cette documentation explique la conteneurisation de l’application **Nailloux‑club** avec Docker et Docker Compose, ainsi que les étapes pour la lancer en local.
 
-2. Dockerfile
-   - FROM php:8.1-apache
-     Base : image officielle PHP 8.1 avec Apache.
-   - RUN apt-get update && apt-get install -y ...
-     Installation des dépendances système (extensions PHP pour pdo_mysql, gd, exif, et Python3).
-   - RUN apt-get install -y python3-pil
-     Installation de la bibliothèque Pillow via le package Debian.
-   - Configuration Apache, copie des fichiers source, ajustement des permissions.
+== Dockerfile
 
-3. docker-compose.yml
-   3.1 Services
-     - app : construit l'image depuis le Dockerfile, expose le port 8080 et monte le code source.
-     - db  : utilise l'image MySQL 8.0, configure la base de données, monte un volume pour les données.
-   3.2 Réseaux
-     - nailloux-network : réseau bridge privé pour la communication inter-services.
-   3.3 Volumes
-     - dbdata : stockage persistant des données MySQL.
-     - ./upload et ./ nailloux.sql pour initialiser la base.
+Le fichier `Dockerfile` définit l’image Docker pour PHP 8.1 sous Apache :
 
-4. Instructions d'utilisation
-   Prérequis :
-     - Installer Docker et Docker Compose sur la machine.
-     - Cloner le dépôt Git et se placer dans le dossier du projet.
-   Étapes :
-     1) Cloner le projet :
-        git clone <url_du_repo> && cd Nailloux-club
-     2) Construire les images et démarrer les services :
-        docker compose up --build -d
-     3) Vérifier le statut des containers :
-        docker compose ps
-     4) Accéder à l’application :
-        Ouvrir dans un navigateur http://localhost:8080
-     6) Arrêter et supprimer les containers et le réseau :
-        docker compose down
+* `FROM php:8.1-apache`  
+  Utilise l’image officielle PHP 8.1 avec Apache.
+
+* `RUN apt-get update && apt-get install -y ...`  
+  Installe les dépendances requises :
+  - Extensions PHP : `pdo_mysql`, `gd`, `exif`  
+  - `python3` pour certains traitements
+
+* `RUN apt-get install -y python3-pil`  
+  Installe Pillow via le package Debian pour la gestion d’images.
+
+* Configuration d’Apache  
+  Copie des sources, ajustement des permissions et personnalisation du serveur.
+
+== docker-compose.yml
+
+Le fichier `docker-compose.yml` orchestre les services de l’application.
+
+=== Services
+
+* `app`  
+  - Construit à partir du `Dockerfile`  
+  - Expose le port `8080`  
+  - Monte le code source local
+
+* `db`  
+  - Basé sur `mysql:8.0`  
+  - Initialise la base avec `nailloux.sql`  
+  - Monte un volume pour la persistance des données
+
+=== Réseau
+
+* `nailloux-network`  
+  Réseau de type bridge pour la communication entre `app` et `db`.
+
+=== Volumes
+
+* `dbdata`  
+  Persistance des données MySQL  
+* `./upload` et `./nailloux.sql`  
+  Dossier d’uploads et script d’initialisation de la base
+
+== Instructions d’utilisation
+
+=== Prérequis
+
+* Docker et Docker Compose installés  
+* Dépôt Git cloné
+
+=== Étapes
+
+1. Cloner le projet  
+   [source,bash]  
+   ----  
+   git clone <url_du_repo>  
+   cd Nailloux‑club  
+   ----
+
+2. Construire et démarrer les services  
+   [source,bash]  
+   ----  
+   docker compose up --build -d  
+   ----
+
+3. Vérifier le statut des conteneurs  
+   [source,bash]  
+   ----  
+   docker compose ps  
+   ----
+
+4. Accéder à l’application  
+   Ouvrir `http://localhost:8080` dans votre navigateur.
+
+5. Arrêter et supprimer les conteneurs  
+   [source,bash]  
+   ----  
+   docker compose down  
+   ----
+
+== Conclusion
+
+Votre application **Nailloux‑club** est désormais conteneurisée et prête à fonctionner dans un environnement isolé.
