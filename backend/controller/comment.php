@@ -29,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         ]);
 
         // Si l'insertion est réussie, rediriger vers la page du fil d'actualités
-        header("Location: /view/feed.php");
+        header("Location: /frontend/view/feed.php");
         exit();
     } catch (PDOException $e) {
         // Gestion des erreurs et affichage d'un message

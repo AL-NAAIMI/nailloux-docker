@@ -121,6 +121,19 @@ if (isset($_POST['lgn']) && $pseudo && $password) {
     $result = register_user($pseudo, $password, $email, $prenom, $nom, $pdo);
 
     if ($result === "Inscription réussie.") {
+        // Auto-login: Set session variables after successful registration
+        $_SESSION['pseudo'] = $pseudo;
+        
+        // Get the user ID from database
+        $stmt = $pdo->prepare("SELECT `id` FROM `utilisateur` WHERE `pseudo` = :pseudo");
+        $stmt->bindParam(':pseudo', $pseudo, PDO::PARAM_STR);
+        $stmt->execute();
+        $user = $stmt->fetch(PDO::FETCH_ASSOC);
+        
+        if ($user) {
+            $_SESSION['id'] = $user['id'];
+        }
+        
         // Redirection après inscription réussie
         echo '<script>';
         echo 'alert("Inscription réussie !");';

@@ -2,7 +2,7 @@
 // Docker-specific database connection file
 
 // Database connection parameters
-$host = '172.18.0.2'; // Direct IP address of the database container
+$host = 'db'; // Docker Compose service name - automatically resolved
 $db = 'nailloux';
 $user = 'root';
 $pswd = 'rootpassword';

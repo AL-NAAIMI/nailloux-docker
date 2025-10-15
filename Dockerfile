@@ -1,8 +1,6 @@
-# ----------------------------------------
 # Dockerfile pour Nailloux-club : conteneurisation
 # Base : PHP 8.1 + Apache
 # Installation des extensions PHP (pdo_mysql, gd, exif) et de Python3-Pillow
-# ----------------------------------------
 
 # 1. Image de base : PHP 8.1 avec Apache
 FROM php:8.1-apache

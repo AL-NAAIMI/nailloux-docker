@@ -1,8 +1,6 @@
-# ----------------------------------------
 # docker-compose.yml pour Nailloux-club : Conteneurisation
 # Définit les services 'app' (PHP/Apache) et 'db' (MySQL 8.0)
 # Configure les volumes, réseaux et variables d'environnement
-# ----------------------------------------
 services:
   app:
     build:
@@ -23,7 +21,8 @@ services:
     networks:
       - nailloux-network
     depends_on:
-      - db
+      db:
+        condition: service_healthy
 
   db:
     image: mysql:8.0
