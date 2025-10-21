@@ -65,6 +65,10 @@ RUN echo '<VirtualHost *:80>\n\
 RUN chown -R www-data:www-data /var/www/html
 RUN chmod -R 755 /var/www/html
 
+# Set ServerName globally to prevent Apache warnings
+RUN echo "ServerName www.nailloux.lan" >> /etc/apache2/apache2.conf
+
+
 # Expose port 80
 # 11. Exposition du port HTTP (80)
 EXPOSE 80
